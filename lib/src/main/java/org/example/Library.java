@@ -9,7 +9,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 public class Library {
   public boolean someLibraryMethod() {
     PIDController controller = new PIDController(1,0,0);
-    Rotation2d rot = new Rotation2d(0,1).plus(new Rotation2d());
+    Rotation2d rot = new Rotation2d(0,1);
+    Rotation2d breakRot = Rotation2d.kZero;
     return controller.calculate(0,rot.getSin()) == 1;
   }
 }
