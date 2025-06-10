@@ -20,19 +20,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'edu.wpi.first.cscore:cscore-java:2025.3.2'
-    implementation 'edu.wpi.first.cameraserver:cameraserver-java:2025.3.2'
-    implementation 'edu.wpi.first.ntcore:ntcore-java:2025.3.2'
-    implementation 'edu.wpi.first.wpilibj:wpilibj-java:2025.3.2'
-    implementation 'edu.wpi.first.wpiutil:wpiutil-java:2025.3.2'
-    implementation 'edu.wpi.first.wpimath:wpimath-java:2025.3.2'
-    implementation 'edu.wpi.first.wpiunits:wpiunits-java:2025.3.2'
-    implementation 'edu.wpi.first.hal:hal-java:2025.3.2'
-    implementation "org.ejml:ejml-simple:0.41"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:2.12.4"
-    implementation "com.fasterxml.jackson.core:jackson-core:2.12.4"
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.12.4"
-    implementation 'edu.wpi.first.thirdparty.frc2023.opencv:opencv-java:4.6.0-2'
+    api group: 'edu.wpi.first.wpimath', name: 'wpimath-java', version: '2023.1.1'
+    api group: 'edu.wpi.first.wpimath', name: 'wpimath-jni', version: '2023.1.1', classifier: 'windowsx86-64'
+
+    api group: 'edu.wpi.first.wpiutil', name: 'wpiutil-java', version: '2023.1.1'
+    api group: 'edu.wpi.first.wpiutil', name: 'wpiutil-jni', version: '2023.1.1', classifier: 'windowsx86-64'
+
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.4'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.4'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.4'
 
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter

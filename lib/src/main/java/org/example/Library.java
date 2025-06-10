@@ -3,8 +3,13 @@
  */
 package org.example;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
+
 public class Library {
   public boolean someLibraryMethod() {
-    return true;
+    PIDController controller = new PIDController(1,0,0);
+    Rotation2d rot = new Rotation2d(0,1).plus(new Rotation2d());
+    return controller.calculate(0,rot.getSin()) == 1;
   }
 }
