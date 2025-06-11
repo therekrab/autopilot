@@ -84,7 +84,7 @@ javadoc {
 nativeUtils {
   exportsConfigs {
     // Main library is just default empty. This will export everything
-    Vendor {
+    Autopilot {
     }
   }
 }

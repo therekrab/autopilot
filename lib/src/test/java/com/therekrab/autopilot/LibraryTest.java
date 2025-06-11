@@ -1,12 +1,12 @@
-package com.vendor.jni;
+package com.therekrab.autopilot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-public class VendorJNITest {
+public class LibraryTest {
   @Test
   void testNumber() {
     // Test to verify that the JNI test link works correctly.
-    assertEquals(VendorJNI.getNumber(), -1, "sin(pi) = -1");
+    assertEquals(Library.getNumber(), -1, "sin(pi) = -1");
   }
 }
