@@ -108,7 +108,6 @@ Temporary Items
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/java-formatter.xml
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -156,8 +155,6 @@ gradle-app.setting
 .project
 .settings/
 bin/
-
-.env
 
 
 # End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode

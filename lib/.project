@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>nfclib</name>
-	<comment>Project autopilot created by Buildship.</comment>
+	<name>lib</name>
+	<comment>Project lib created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1749604429275</id>
+			<id>1749663032805</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
