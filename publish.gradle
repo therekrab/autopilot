@@ -218,5 +218,15 @@ model {
                 version pubVersion
             }
         }
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/therekrab/autopilot")
+                credentials {
+                    username = project.findProperty("gpr.user") ?: System.getenv("GH_USER")
+                    password = project.findProperty("gpr.token") ?: System.getenv("GH_TOKEN")
+                }
+            }
+        }
     }
 }
