@@ -1,0 +1,137 @@
+apply plugin: 'maven-publish'
+
+ext.licenseFile = files("$rootDir/LICENSE.txt")
+
+def pubVersion = '0.0.1'
+
+def outputsFolder = file("$buildDir/outputs")
+
+def versionFile = file("$outputsFolder/version.txt")
+
+task outputVersions() {
+    description = 'Prints the versions of wpilib to a file for use by the downstream packaging project'
+    group = 'Build'
+    outputs.files(versionFile)
+
+    doFirst {
+        buildDir.mkdir()
+        outputsFolder.mkdir()
+    }
+
+    doLast {
+        versionFile.write pubVersion
+    }
+}
+
+task libraryBuild() {}
+
+build.dependsOn outputVersions
+
+task copyAllOutputs(type: Copy) {
+    destinationDir file("$buildDir/allOutputs")
+    from versionFile
+    dependsOn outputVersions
+}
+
+build.dependsOn copyAllOutputs
+copyAllOutputs.dependsOn outputVersions
+
+ext.addTaskToCopyAllOutputs = { task ->
+    copyAllOutputs.dependsOn task
+    copyAllOutputs.inputs.file task.archiveFile
+    copyAllOutputs.from task.archiveFile
+}
+
+def artifactGroupId = 'com.team3414.autopilot'
+def baseArtifactId = 'autopilot'
+def javaBaseName = "_GROUP_com_team3414_autopilot_ID_${baseArtifactId}-java_CLS"
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task outputJar(type: Jar, dependsOn: classes) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    from sourceSets.main.output
+}
+
+task outputSourcesJar(type: Jar, dependsOn: classes) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task outputJavadocJar(type: Jar, dependsOn: javadoc) {
+    archiveBaseName = javaBaseName
+    destinationDirectory = outputsFolder
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives outputJar
+    archives outputSourcesJar
+    archives outputJavadocJar
+}
+
+addTaskToCopyAllOutputs(outputSourcesJar)
+addTaskToCopyAllOutputs(outputJavadocJar)
+addTaskToCopyAllOutputs(outputJar)
+
+build.dependsOn outputSourcesJar
+// build.dependsOn outputJavadocJar
+build.dependsOn outputJar
+
+libraryBuild.dependsOn build
+
+def releasesRepoUrl = "$buildDir/repos/releases"
+
+publishing {
+    repositories {
+        maven {
+            url = releasesRepoUrl
+        }
+    }
+}
+
+task cleanReleaseRepo(type: Delete) {
+    delete releasesRepoUrl
+}
+
+tasks.matching {it != cleanReleaseRepo}.all {it.dependsOn cleanReleaseRepo}
+
+model {
+    publishing {
+        repositories {
+            maven {
+                url = uri("https://maven.pkg.github.com/therekrab/autopilot")
+                credentials {
+                    username = System.getenv("USERNAME")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
+
+        publications {
+            java(MavenPublication) {
+                artifact jar
+                artifact sourcesJar
+                artifact javadocJar
+
+                artifactId = "${baseArtifactId}-java"
+                groupId artifactGroupId
+                version pubVersion
+            }
+        }
+    }
+}
