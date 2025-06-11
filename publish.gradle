@@ -199,31 +199,7 @@ model {
     publishing {
         def taskList = createComponentZipTasks($.components, ['Autopilot'], zipBaseName, Zip, project, includeStandardZipFormat)
 
-        // def driverTaskList = createComponentZipTasks($.components, ['VendorDriver'], driverZipBaseName, Zip, project, includeStandardZipFormat)
-
         publications {
-            // cpp(MavenPublication) {
-            //     taskList.each {
-            //         artifact it
-            //     }
-            //     artifact cppHeadersZip
-            //     artifact cppSourceZip
-            //
-            //     artifactId = "${baseArtifactId}-cpp"
-            //     groupId artifactGroupId
-            //     version pubVersion
-            // }
-            // driver(MavenPublication) {
-            //     driverTaskList.each {
-            //         artifact it
-            //     }
-            //     artifact cppDriverHeadersZip
-            //
-            //     artifactId = "${baseArtifactId}-driver"
-            //     groupId artifactGroupId
-            //     version pubVersion
-            // }
-
             java(MavenPublication) {
                 artifact jar
                 artifact sourcesJar
