@@ -29,7 +29,7 @@ jobs:
       - name: Deploy javadocs and maven repo
         run: |
           cp -r build/docs/javadoc build/javadoc
-          cp -r build/repo build/repo
+          cp -r build/repo docs/repo
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/docs' }}
