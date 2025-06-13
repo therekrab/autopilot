@@ -1,5 +1,5 @@
 What is Autopilot?
-==============
+==================
 
 Autopilot is a solution to the problem of holonomic motion control. It aims to
 cross the bridge between powerful motion control, which is often very complex,

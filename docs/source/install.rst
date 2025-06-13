@@ -1,10 +1,10 @@
 Installation
-==========
+============
 
 Get up and running with Autopilot in minutes.
 
 Install via vendordep
------------------
+---------------------
 
 In VS code, press ``Ctrl-Shift-P`` or click the WPILib icon in the top right to
 open the command pallete. Search and select ``Manage Vendor Libraries``.
