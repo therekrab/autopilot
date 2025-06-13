@@ -1,0 +1,60 @@
+.. Autopilot documentation master file, created by
+   sphinx-quickstart on Sun Jun  8 17:25:57 2025.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Autopilot Documentation
+=======================
+
+**Autopilot** is a Java-based pathing solution for use in First Robotics
+Competition.
+
+Differing from other options in the field of autonomous
+navigation, Autopilot doesn't *ever* generate trajectories for the future.
+Instead, Autopilot works on a stateless structure, meaning that there is no
+setup necessary to make it work - making it a very powerful tool for
+dynamic autonomous navigation on the fly.
+
+Tools that pregenerate trajectories can come with side effects that are not
+always desireable. They often use time as an input to determine the current
+setpoint, which can cause problems if robot behavior doesn't line up with
+expected behvaior. Time-based solutions also rely on pregenerated trajectories
+that can be computationally expensive to generate on-the-fly. Because the
+real-world robot behavior doesn't always match expected behavior, a new path
+may have to be generated multiple times during the execution of one path,
+furthering the computational costs of such pathing systems.
+
+Autopilot was inspired by the autonomous control systems in use by teams 2056
+and 2910 in the 2025 season of FRC. Electing to use simple line pathing over
+complex pregenerated trajectories simplifies the process of generating
+autonomous routines, and is very efficient in the terms of what needs to be
+computed. PID calculations, for exapmle, are stateless, and don't require
+thinking into the future. They simply are created cleverly enough to naturally
+arrive at the desired state. However, forcing all trajectories to be straight
+lines can result in convoluted paths to go around a point on the field, or
+nonoptimal trajectories.
+
+Autopilot aims to close the gap between such simple solutions that don't offer
+enough configurability and more complex solutions that can be either
+computationally intensive, exhibit quirky behavior, or both. Like the simpler
+solutions of straight-line pathing, Autopilot is completely stateless and
+doesn't ever think ahead. However, like more complex solutions, Autopilot also
+doesn't require the robot to travel in a straight line and therefore offers
+more customizability for robot movement.
+
+Autopilot also utilizes a custom motion profile to maximize both **speed** and
+**smoothness**. Autopilot employs a regular trapezoidal profile (constant
+acelleration) for it's "takeoff" phase, but exhibits the end behavior of an
+S-curve motion profile. This means that autopilot uses constant jerk in the
+"landing" phase of its motion.
+
+This creates smooth and soft landings on alignment, crucial to accuracy-focused
+games like those in FRC. Assuming the desired end velocity of a target is zero,
+Autopilot ensures that the robot will reach a state of zero error, zero
+velocity, and zero acceleration. This means that the robot will come to a very
+smooth stop that ensures fluid motion.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
