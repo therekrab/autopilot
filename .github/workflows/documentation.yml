@@ -17,6 +17,9 @@ jobs:
         run: |
           mkdir build/repo
           ./gradlew -Dmaven.repo.local=${{github.workspace}}/build/repo publishToMavenLocal
+      - name: Test to see if this was done!
+        run: |
+          ls build/repo
       - name: Install dependencies
         run: |
           pip install sphinx furo
