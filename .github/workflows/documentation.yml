@@ -16,7 +16,7 @@ jobs:
       - name: Publish maven package
         run: |
           mkdir build/repo
-          ./gradlew -Dmaven.repo.local=build/repo publishToMavenLocal
+          ./gradlew -Dmaven.repo.local=${{github.workspace}}/build/repo publishToMavenLocal
       - name: Install dependencies
         run: |
           pip install sphinx furo
