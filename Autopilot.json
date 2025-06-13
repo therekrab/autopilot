@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "frcYear": "2025",
   "uuid": "07c0f591-912f-4dd3-bde1-6829e6d9dc78",
-  "mavenUrls": ["https://therekrab.github.com/autopilot/repo"],
+  "mavenUrls": ["https://therekrab.github.io/autopilot/repo"],
   "jsonUrl": "https://github.com/therekrab/autopilot/releases/latest/download/Autopilot.json",
   "javaDependencies": [
     {
