@@ -13,6 +13,11 @@ jobs:
       - name: Generate Javadoc
         run: |
           ./gradlew javadoc
+      - name: Publish maven package
+        run: |
+          mkdir build/repo
+        run: |
+          ./gradlew -Dmaven.repo.local=build/repo publishToMavenLocal
       - name: Install dependencies
         run: |
           pip install sphinx furo
