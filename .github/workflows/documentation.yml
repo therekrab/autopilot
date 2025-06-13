@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+      - name: Generate Javadoc
+        run: |
+          ./gradlew javadoc
       - name: Install dependencies
         run: |
           pip install sphinx furo
@@ -17,7 +20,7 @@ jobs:
         run: |
           sphinx-build docs/source docs/build
       - name: Deploy javadocs
-      - run: ./gradlew build -Prelease && cp build/docs/javadoc build/javadoc
+      - run: cp build/docs/javadoc build/javadoc
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/docs' }}
