@@ -33,4 +33,3 @@ jobs:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/build/
-          force_orphan: true
