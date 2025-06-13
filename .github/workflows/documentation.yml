@@ -17,6 +17,7 @@ jobs:
         run: |
           sphinx-build docs/source docs/build
       - name: Deploy javadocs
+        run: ./gradlew build -Prelease
         run: cp build/docs/javadoc build/javadoc
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
