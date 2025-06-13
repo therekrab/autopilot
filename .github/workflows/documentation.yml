@@ -12,8 +12,8 @@ jobs:
       - uses: actions/setup-python@v5
       - name: Publish maven package
         run: |
-          mkdir build/repo
-          ./gradlew -Dmaven.repo.local=${{github.workspace}}/build/repo publishToMavenLocal
+          mkdir repo
+          ./gradlew -Dmaven.repo.local=${{github.workspace}}/repo publishToMavenLocal
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
@@ -22,8 +22,8 @@ jobs:
           sphinx-build docs/source docs/build
       - name: Deploy javadocs and maven repo
         run: |
-          cp -r build/docs/javadoc/ build/
-          cp -r build/repo docs/repo
+          cp -r build/docs/javadoc docs
+          cp -r repo docs/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
