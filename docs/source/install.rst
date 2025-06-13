@@ -25,4 +25,4 @@ It's available with the package name ``com.therekrab.autopilot``.
 
 You *may* have to reopen your editor if suggestions aren't loading right away.
 
-To read about how Autopilot works, checkout :doc:`usage`.
+To read about how Autopilot works, check out :doc:`usage`.
