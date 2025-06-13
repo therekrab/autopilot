@@ -16,7 +16,6 @@ jobs:
       - name: Publish maven package
         run: |
           mkdir build/repo
-        run: |
           ./gradlew -Dmaven.repo.local=build/repo publishToMavenLocal
       - name: Install dependencies
         run: |
