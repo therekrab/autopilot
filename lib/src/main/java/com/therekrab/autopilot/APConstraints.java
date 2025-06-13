@@ -32,14 +32,6 @@ public class APConstraints {
     this.jerk = jerk;
   }
 
-  /** Unlimited constraints */
-  public static APConstraints unlimited() {
-    return new APConstraints(
-        Double.POSITIVE_INFINITY,
-        Double.POSITIVE_INFINITY,
-        Double.POSITIVE_INFINITY);
-  }
-
   /**
    * Modifies this constraint's max velocity and returns itself. This is the maximum velocity that
    * autopilot will demand.
