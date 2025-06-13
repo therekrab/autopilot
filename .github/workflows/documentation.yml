@@ -16,7 +16,7 @@ jobs:
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
-        run: ./gradlew build -Prelease
+      - run: ./gradlew build -Prelease
       - name: Deploy javadocs
       - run: cp build/docs/javadoc build/javadoc
       - name: Deploy to GitHub Pages
