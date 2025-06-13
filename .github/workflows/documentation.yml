@@ -22,8 +22,8 @@ jobs:
           sphinx-build docs/source docs/build
       - name: Deploy javadocs and maven repo
         run: |
-          cp -r build/docs/javadoc docs
-          cp -r repo docs/
+          cp -r build/docs/javadoc docs/build
+          cp -r repo docs/build/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
