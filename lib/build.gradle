@@ -16,9 +16,11 @@ plugins {
 
 tasks.withType(Javadoc) {
     options {
-        docTitle = "Autopilot Javadoc"
+        title = "Autopilot Javadoc"
+        links "https://docs.oracle.com/en/java/javase/17/docs/api/", 'https://github.wpilib.org/allwpilib/docs/release/java/'
     }
 }
+
 
 repositories {
     // Use Maven Central for resolving dependencies.
