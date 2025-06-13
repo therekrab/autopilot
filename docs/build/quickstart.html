@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -237,7 +237,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -246,6 +246,22 @@
           <section id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
 <p>Get up and running with Autopilot in minutes.</p>
+<section id="install-vendordep">
+<h2>Install vendordep<a class="headerlink" href="#install-vendordep" title="Link to this heading">¶</a></h2>
+<p>In VS code, press <code class="docutils literal notranslate"><span class="pre">Ctrl-Shift-P</span></code> or click the WPILib icon in the top right to
+open the command pallete. Search and select <code class="docutils literal notranslate"><span class="pre">Manage</span> <span class="pre">Vendor</span> <span class="pre">Libraries</span></code>.</p>
+<a class="reference internal image-reference" href="_images/install1.png"><img alt="_images/install1.png" src="_images/install1.png" style="width: 600px;" />
+</a>
+<p>Then select <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">New</span> <span class="pre">Libraries</span> <span class="pre">(online)</span></code>:</p>
+<a class="reference internal image-reference" href="_images/install2.png"><img alt="_images/install2.png" src="_images/install2.png" style="width: 600px;" />
+</a>
+<p>Finally, enter the vendordep URL:
+<code class="docutils literal notranslate"><span class="pre">https://therekrab.github.io/autopilot/vendordep.json</span></code>.</p>
+<p>Run a build to finish up, and you’ve got Autopilot installed!
+It’s available with the package name <code class="docutils literal notranslate"><span class="pre">com.therekrab.autopilot</span></code>.</p>
+<p>You <em>may</em> have to reopen your editor if suggestions aren’t loading right away.</p>
+<p>To read about how Autopilot works, checkout <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>.</p>
+</section>
 </section>
 
         </article>
@@ -283,8 +299,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Quickstart</a><ul>
+<li><a class="reference internal" href="#install-vendordep">Install vendordep</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -6,19 +6,30 @@
 Autopilot Documentation
 =======================
 
+.. warning::
+   This project is under current development. Be prepared if the docs
+   change suddenly or something breaks.
+
 Autopilot is a tool developed by FRC team 3414, designed to act as a powerful
 solution for autonomous robot control.
 
 Check out :doc:`about` to learn all the features of Autopilot and why it may
 (or may not) be the solution for your team.
 
-.. note::
-   This project is under current development. I'm still learning how to make this work.
+.. attention::
+   This is currently a Java-only library.
+   If your team uses C++, Autopilot is not available.
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
    about
+   install
    usage
-   quickstart
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API
+
+   Java API <https://therekrab.github.io/autopilot/javadoc>

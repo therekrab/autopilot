@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Quickstart" href="quickstart.html" /><link rel="prev" title="Why Autopilot?" href="about.html" />
+<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Installation" href="install.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>Usage - Autopilot 2025 documentation</title>
@@ -200,9 +200,13 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="about.html">Why Autopilot?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">What is Autopilot?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://therekrab.github.io/autopilot/javadoc">Java API</a></li>
 </ul>
 
 </div>
@@ -245,9 +249,92 @@
         <article role="main" id="furo-main-content">
           <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<p>To use Autopilot, figure it out.</p>
+<p>Autopilot is structured off of four fundamental classes, each built from the last.</p>
+<section id="apconstraints">
+<h2><code class="docutils literal notranslate"><span class="pre">APConstraints</span></code><a class="headerlink" href="#apconstraints" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">APConstraints</span></code> class carries with it all the limits on the robot’s
+motion. These are:</p>
+<ul class="simple">
+<li><p>Velocity: The speed of the robot that the takeoff phase will stop at. The
+robot will never be demanded to go faster than this speed. Units are in
+meters per second.</p></li>
+<li><p>Acceleration: The maximum acceleration that the robot will obey in the
+takeoff phase. The units are meters per second squared.</p></li>
+<li><p>Jerk: The change in acceleration that will be used during the landing phase.
+These units are meters per second cubed.</p></li>
+</ul>
+<p>With the constructor <cite>new APConstraints()</cite>, velocity is uncapped, and the other
+two values are set to zero. With the constructor <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APConstraints(double</span>
+<span class="pre">acceleration,</span> <span class="pre">double</span> <span class="pre">jerk)</span></code>, velocity is left unlimited.</p>
+<p>Unless there’s a need for a limit on velocity, it is recommended to
+leave this unlimited, and instead governed by the robot’s physical maximum
+speed.</p>
+<p>You can find docs on <code class="docutils literal notranslate"><span class="pre">APConstraints</span></code>
+<a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APConstraints.html">here</a>.</p>
+</section>
+<section id="approfile">
+<h2><code class="docutils literal notranslate"><span class="pre">APProfile</span></code><a class="headerlink" href="#approfile" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">APProfile</span></code> class holds all the data associated with a robot’s behavior.
+This includes its constraints, as well as its tolerated error and beeline
+radius. Here’s their meanings:</p>
+<ul class="simple">
+<li><p>Constraints: An instance of <code class="docutils literal notranslate"><span class="pre">APConstraints</span></code> that will be used to limit the
+robot’s behavior.</p></li>
+<li><p>Tolerated error: The maximum error at which an instance of autopilot
+configured with this profile will regard as “at target”. This consists of a
+translational error as well as rotational.</p></li>
+<li><p>Beeline radius: To prevent overshooting the target and attempting to back up
+again, there is a given radius below which the “beeline” strategy (drive
+straight towards target) takes over, even if an entry angle is desired. This should be set to a small
+value.</p></li>
+</ul>
+<p>The default constructor for this class, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APProfile()</span></code>, sets all values to
+zero. More documentation for this class can be found at the docs <a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APProfile.html">here</a>.</p>
+</section>
+<section id="aptarget">
+<h2><code class="docutils literal notranslate"><span class="pre">APTarget</span></code><a class="headerlink" href="#aptarget" title="Link to this heading">¶</a></h2>
+<p>This is a class that stores information about a target. This includes:</p>
+<ul>
+<li><p>Reference: This is the goal state, and includes both heading and position.</p></li>
+<li><p>Entry angle: This is an optional angle that tells autopilot what direction
+from the target the robot should come from.</p></li>
+<li><p>End velocity: The ideal end velocity of the path. If this is greater than the
+maximum velocity set by a profile’s constraints, or the robot is incapable of
+reaching this velocity, Autopilot will continue to demand a higher velocity,
+but this will not interfere with whether the path is complete or not. If this
+is not supplied, the robot will always drive directly at the target.</p>
+<p>If this value is nonzero, it is recommended to use a profile with a large
+amount of translational tolerance, because overshooting and never being within
+tolerance could cause the robot to turn around and drive towards the target again.</p>
+</li>
+<li><p>Rotation radius: The (optional) distance is the minimum distance for the
+robot to begin to rotate towards the target. If this is left unset, there is
+no limit on when the robot can rotate, and it will be told to rotate as soon
+as the flight begins.</p></li>
+</ul>
+<p>The default constructor, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APTarget()</span></code> sets the reference pose to
+<code class="docutils literal notranslate"><span class="pre">Pose2d.kZero</span></code>, sets the target velocity to 0, and leaves both entry angle
+and rotation radius unset. The other constructor, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APTarget(Pose2d</span> <span class="pre">reference)</span></code> does the same
+thing except sets the reference pose as supplied.</p>
+<p>The docs on <code class="docutils literal notranslate"><span class="pre">APTarget</span></code> can be found <a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APTarget.html#%3Cinit%3E()">here</a></p>
+</section>
+<section id="autopilot">
+<h2><code class="docutils literal notranslate"><span class="pre">Autopilot</span></code><a class="headerlink" href="#autopilot" title="Link to this heading">¶</a></h2>
+<p>This is the class that actually handles any computations. This has two public
+methods, <code class="docutils literal notranslate"><span class="pre">calculate(Pose2d</span> <span class="pre">current,</span> <span class="pre">Translation2d</span> <span class="pre">velocity,</span> <span class="pre">APTarget</span> <span class="pre">target)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">atTarget(Pose2d</span> <span class="pre">current,</span> <span class="pre">APTarget</span> <span class="pre">target)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">calculate(Pose2d</span> <span class="pre">current,</span> <span class="pre">Translation2d</span> <span class="pre">velocity,</span> <span class="pre">APTarget</span> <span class="pre">target)</span></code>
+method computes the field-relative speeds of the robot and its ideal heading at
+this point.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The rotation component of the result from Autopilot is a heading
+setpoint - it is up to the user to find another form of control (Profiled
+PID is recommended) to reach the heading goal.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">atTarget(Pose2d</span> <span class="pre">current,</span> <span class="pre">APTarget</span> <span class="pre">target)</span></code> method is a method that
+returns whether the current pose of the robot is within the <code class="docutils literal notranslate"><span class="pre">Autopilot</span></code>’s
+tolerances.</p>
 </section>
 </section>
 
@@ -256,23 +343,15 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quickstart.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Quickstart</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="about.html">
+          
+          <a class="prev-page" href="install.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Why Autopilot?</div>
+                <div class="title">Installation</div>
                 
               </div>
             </a>
@@ -307,7 +386,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Usage</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#apconstraints"><code class="docutils literal notranslate"><span class="pre">APConstraints</span></code></a></li>
+<li><a class="reference internal" href="#approfile"><code class="docutils literal notranslate"><span class="pre">APProfile</span></code></a></li>
+<li><a class="reference internal" href="#aptarget"><code class="docutils literal notranslate"><span class="pre">APTarget</span></code></a></li>
+<li><a class="reference internal" href="#autopilot"><code class="docutils literal notranslate"><span class="pre">Autopilot</span></code></a></li>
 </ul>
 </li>
 </ul>
