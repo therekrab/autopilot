@@ -24,6 +24,7 @@ jobs:
         run: |
           cp -r build/docs/javadoc docs/build
           cp -r repo docs/build/
+          cp Autopilot.json docs/build/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
