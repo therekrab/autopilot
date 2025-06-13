@@ -7,8 +7,4 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AutopilotTest {
-    @Test void someLibraryMethodReturnsTrue() {
-        Autopilot classUnderTest = new Autopilot();
-        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
-    }
 }
