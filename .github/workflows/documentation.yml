@@ -10,10 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - name: Publish maven package
+      - name: Generate javadocs
         run: |
-          mkdir repo
-          ./gradlew -Dmaven.repo.local=${{github.workspace}}/repo publishToMavenLocal
+          ./gradlew javadoc
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
@@ -23,8 +22,6 @@ jobs:
       - name: Deploy javadocs and maven repo
         run: |
           cp -r build/docs/javadoc docs/build
-          cp -r repo docs/build/
-          cp Autopilot.json docs/build/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
