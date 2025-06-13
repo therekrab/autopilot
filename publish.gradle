@@ -201,32 +201,38 @@ model {
 
         publications {
             java(MavenPublication) {
-                artifact jar
                 artifact sourcesJar
                 artifact javadocJar
 
                 artifactId = "${baseArtifactId}-java"
                 groupId artifactGroupId
                 version pubVersion
+                // from components.java
             }
-
-            vendordep(MavenPublication) {
-                artifact vendordepJsonZip
-
-                artifactId = "${baseArtifactId}-vendordep"
-                groupId artifactGroupId
-                version pubVersion
-            }
+            //
+            // vendordep(MavenPublication) {
+            //     artifact vendordepJsonZip
+            //
+            //     artifactId = "${baseArtifactId}-vendordep"
+            //     groupId artifactGroupId
+            //     version pubVersion
+            // }
         }
+        // repositories {
+        //     maven {
+        //         name = "GitHubPackages"
+        //         url = uri("https://maven.pkg.github.com/therekrab/autopilot")
+        //         credentials {
+        //             username = project.findProperty("gpr.user") ?: System.getenv("GH_USER")
+        //             password = project.findProperty("gpr.token") ?: System.getenv("GH_TOKEN")
+        //         }
+        //     }
+        // }
         repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/therekrab/autopilot")
-                credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("GH_USER")
-                    password = project.findProperty("gpr.token") ?: System.getenv("GH_TOKEN")
-                }
-            }
-        }
+              maven {
+                  name = "LocalMavenRepo"
+                  url = layout.buildDirectory.dir("repo") // This will create a 'repo' directory in your build folder
+              }
+          }
     }
 }
