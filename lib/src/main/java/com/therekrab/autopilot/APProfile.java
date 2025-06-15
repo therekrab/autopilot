@@ -22,7 +22,14 @@ public class APProfile {
   protected Angle errorTheta;
   protected Distance beelineRadius;
 
-  public APProfile() {
+  /**
+   * Builds an APProfile with the given constraints. Tolerated error and beeline radius are all set
+   * to zero.
+   *
+   * @param constraints The motion constraints for this profile
+   */
+  public APProfile(APConstraints constraints) {
+    this.constraints = constraints;
     errorXY = Meters.of(0);
     errorTheta = Rotations.of(0);
     beelineRadius = Meters.of(0);
