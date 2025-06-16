@@ -270,12 +270,11 @@ Simplifying gives us the final equation:
 
 This is **exactly** what we needed! This gives us the maximum velocity at some
 distance to still be within the jerk constraint. But there's one more step to
-be done: we still need to compensate for robot motion.
+be done: we still need to compensate for current speeds.
 
-We **always** want to travel along the path, so we *never* permit motion that
-doesn't follow the path. But if the robot is at rest, we don't want to
-instantly command some the max velocity. We need to approach the goal velocity,
-which is where the acceleration constraint comes into play.
+If the robot is at rest, we don't want to instantly command the max velocity.
+We need to approach the goal velocity, which is where the acceleration
+constraint comes into play.
 
 .. important::
    For the rest of this section, I use "velocity" when I refer to
@@ -289,6 +288,9 @@ during this time by multiplying :math:`\Delta t` by our acceleration value.
 This is the largest legal change in robot velocity if we always obey our
 constraints. If the difference between the ideal velocity and the current velocity
 is smaller than that change, then we can simply apply the ideal velocity.
+
+Finally, the commanded velocity is capped at whatever the velocity constraint
+is, if it exists.
 
 Before I wrap up this section, it's important to note the times when Autopilot
 doesn't obey its given constraints.
