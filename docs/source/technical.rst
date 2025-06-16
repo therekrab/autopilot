@@ -140,7 +140,7 @@ Pt. I
 ~~~~~
 
 .. caution::
-   This is a **long** section. Be prepared for lots of formula and
+   This is a **long** section. Be prepared for lots of formulae and
    expressions.
 
 Once we have a unit vector telling us in what direction we need to drive the
