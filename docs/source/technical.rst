@@ -43,13 +43,14 @@ This curve has a variety of useful applications:
    good.
 
 2. Modifying :math:`a` only scales the curve. This means that if some point is
-   placed on the cartesian plane along and this curve is overlaid, scaling the
-   curve by changing :math:`a` can cause the curve to touch a.
+   placed on the cartesian plane and this curve is overlaid, scaling the curve
+   by changing :math:`a` can cause the curve to touch a. Generating a path that
+   includes the current position is good.
 
 3. The curve is always decreasing for smaller values of :math:`\theta`. As
    :math:`\theta` approaches zero, the curve moves towards the center. Because
    :math:`\theta = 0` is aligned with the positive x axis, entry angle is
-   always respected.
+   always respected, which is good.
 
 The value for :math:`a` must scale dynamically, but the value of :math:`b` is
 left unrestricted. Autopilot chooses :math:`b` to be 1. There are two reasons for this:
