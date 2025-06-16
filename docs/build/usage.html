@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Installation" href="install.html" />
+<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Under the Hood" href="technical.html" /><link rel="prev" title="Installation" href="install.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>Usage - Autopilot 2025 documentation</title>
@@ -203,6 +203,7 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">What is Autopilot?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical.html">Under the Hood</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
@@ -249,7 +250,8 @@
         <article role="main" id="furo-main-content">
           <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
-<p>Autopilot is structured off of four fundamental classes, each built from the last.</p>
+<p>Autopilot is structured off of four fundamental classes, each playing an
+important role.</p>
 <section id="apconstraints">
 <h2><code class="docutils literal notranslate"><span class="pre">APConstraints</span></code><a class="headerlink" href="#apconstraints" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">APConstraints</span></code> class carries with it all the limits on the robot’s
@@ -314,9 +316,9 @@ as the flight begins.</p></li>
 </ul>
 <p>The default constructor, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APTarget()</span></code> sets the reference pose to
 <code class="docutils literal notranslate"><span class="pre">Pose2d.kZero</span></code>, sets the target velocity to 0, and leaves both entry angle
-and rotation radius unset. The other constructor, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APTarget(Pose2d</span> <span class="pre">reference)</span></code> does the same
-thing except sets the reference pose as supplied.</p>
-<p>The docs on <code class="docutils literal notranslate"><span class="pre">APTarget</span></code> can be found <a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APTarget.html#%3Cinit%3E()">here</a></p>
+and rotation radius unset. The other constructor, <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APTarget(Pose2d</span>
+<span class="pre">reference)</span></code> does the same thing except sets the reference pose as supplied.</p>
+<p>The docs on <code class="docutils literal notranslate"><span class="pre">APTarget</span></code> can be found <a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APTarget.html">here</a></p>
 </section>
 <section id="autopilot">
 <h2><code class="docutils literal notranslate"><span class="pre">Autopilot</span></code><a class="headerlink" href="#autopilot" title="Link to this heading">¶</a></h2>
@@ -334,7 +336,7 @@ PID is recommended) to reach the heading goal.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">atTarget(Pose2d</span> <span class="pre">current,</span> <span class="pre">APTarget</span> <span class="pre">target)</span></code> method is a method that
 returns whether the current pose of the robot is within the <code class="docutils literal notranslate"><span class="pre">Autopilot</span></code>’s
-tolerances.</p>
+tolerances. Read more about the <code class="docutils literal notranslate"><span class="pre">Autopilot</span></code> class <a class="reference external" href="https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/Autopilot.html">here</a></p>
 </section>
 </section>
 
@@ -343,7 +345,15 @@ tolerances.</p>
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="technical.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Under the Hood</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="install.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">

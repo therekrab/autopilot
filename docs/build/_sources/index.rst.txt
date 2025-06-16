@@ -23,6 +23,7 @@ Check out :doc:`about` to learn all the features of Autopilot and why it may
    about
    install
    usage
+   technical
 
 .. toctree::
    :maxdepth: 1

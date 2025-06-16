@@ -153,14 +153,9 @@ public class Autopilot {
     }
     theta = Math.abs(theta);
     double hypot = Math.hypot(theta, 1);
-    double a = theta / hypot;
-    // u is for unscaled.
-    double u1 = 0.5 * hypot * theta;
-    double u2 = 0.25 * Math.log(1 - a);
-    double u3 = 0.25 * Math.log(1 + a);
-    double u = u1 - u2 + u3;
-    double scaled = radius / theta * u;
-    return scaled;
+    double u1 = radius * hypot;
+    double u2 = radius * Math.log(theta + hypot) / theta;
+    return 0.5 * (u1 + u2);
   }
 
   /**

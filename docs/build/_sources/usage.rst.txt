@@ -1,7 +1,8 @@
 Usage
 =====
 
-Autopilot is structured off of four fundamental classes, each built from the last.
+Autopilot is structured off of four fundamental classes, each playing an
+important role.
 
 ``APConstraints``
 -----------------
@@ -80,11 +81,11 @@ This is a class that stores information about a target. This includes:
 
 The default constructor, ``new APTarget()`` sets the reference pose to
 ``Pose2d.kZero``, sets the target velocity to 0, and leaves both entry angle
-and rotation radius unset. The other constructor, ``new APTarget(Pose2d reference)`` does the same
-thing except sets the reference pose as supplied.
+and rotation radius unset. The other constructor, ``new APTarget(Pose2d
+reference)`` does the same thing except sets the reference pose as supplied.
 
 The docs on ``APTarget`` can be found `here
-<https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APTarget.html#%3Cinit%3E()>`_
+<https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APTarget.html>`_
 
 ``Autopilot``
 -------------
@@ -103,4 +104,5 @@ this point.
 
 The ``atTarget(Pose2d current, APTarget target)`` method is a method that
 returns whether the current pose of the robot is within the ``Autopilot``'s
-tolerances.
+tolerances. Read more about the ``Autopilot`` class `here
+<https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/Autopilot.html>`_

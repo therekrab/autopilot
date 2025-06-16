@@ -203,6 +203,7 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">What is Autopilot?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical.html">Under the Hood</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
@@ -333,8 +334,10 @@ line, is the path that the robot will follow if it’s entry angle is 0 degrees
 (to the right along the x axis).</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Entry angle is not the goal direction of the target from the
-robot. Instead, it is the goal direction <strong>of the robot from the target</strong>.</p>
+<p>Entry angle is not the goal direction of the robot from the
+target. Instead, it is the goal direction <strong>of the target from the robot</strong>.
+This means it is the direction that the robot will end up going right before
+it reaches the target.</p>
 </div>
 <p>Autopilot also offers control over rotation, through the use of an optional
 <strong>rotation radius</strong>. The rotation radius is the minimum distance from the

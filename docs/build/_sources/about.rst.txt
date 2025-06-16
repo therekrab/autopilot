@@ -100,8 +100,10 @@ line, is the path that the robot will follow if it's entry angle is 0 degrees
 (to the right along the x axis).
 
 .. important::
-   Entry angle is not the goal direction of the target from the
-   robot. Instead, it is the goal direction **of the robot from the target**.
+   Entry angle is not the goal direction of the robot from the
+   target. Instead, it is the goal direction **of the target from the robot**.
+   This means it is the direction that the robot will end up going right before
+   it reaches the target.
 
 Autopilot also offers control over rotation, through the use of an optional
 **rotation radius**. The rotation radius is the minimum distance from the
