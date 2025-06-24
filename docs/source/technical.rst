@@ -370,11 +370,11 @@ it gets boring. You've been warned.
 
 We can begin with a trig substitution:
 
-:math:`\text{let } x = tan(\theta)`
+:math:`\text{let } x = \tan(\theta)`
 
-:math:`{dx \over d\theta} = sec^2(\theta)`
+:math:`{dx \over d\theta} = \sec^2(\theta)`
 
-:math:`dx = sec^2(\theta)d\theta`
+:math:`dx = \sec^2(\theta)d\theta`
 
 .. important::
    **Please** remember that this :math:`\theta` is **NOT** the same
@@ -382,13 +382,13 @@ We can begin with a trig substitution:
 
 After this substitution, our integral becomes:
 
-:math:`\int \sqrt{tan^2(\theta) + 1} \cdot sec^2(\theta)d\theta`
+:math:`\int \sqrt{\tan^2(\theta) + 1} \cdot \sec^2(\theta)d\theta`
 
-Recalling that :math:`tan^2(a) + 1 = sec^2(a)`:
+Recalling that :math:`\tan^2(a) + 1 = \sec^2(a)`:
 
-:math:`\int \sqrt{sec^2(\theta)} \cdot sec^2(\theta)d\theta`
+:math:`\int \sqrt{\sec^2(\theta)} \cdot \sec^2(\theta)d\theta`
 
-:math:`= \int sec(\theta) \cdot sec^2(\theta)d\theta`
+:math:`= \int \sec(\theta) \cdot \sec^2(\theta)d\theta`
 
 Now, we can use integration by parts to "simplify" this expression:
 
@@ -396,38 +396,38 @@ Now, we can use integration by parts to "simplify" this expression:
    :widths: 50 50
    :header-rows: 0
 
-   * - :math:`u = sec(\theta)`
-     - :math:`v = tan(\theta)`
+   * - :math:`u = \sec(\theta)`
+     - :math:`v = \tan(\theta)`
 
-   * - :math:`u' = sec(\theta)tan(\theta)`
-     - :math:`v' = sec^2(\theta)`
+   * - :math:`u' = \sec(\theta)\tan(\theta)`
+     - :math:`v' = \sec^2(\theta)`
 
 Thus, the integral becomes:
 
-:math:`sec(\theta)tan(\theta) - \int sec(\theta)tan^2(\theta)d\theta`
+:math:`\sec(\theta)\tan(\theta) - \int \sec(\theta)\tan^2(\theta)d\theta`
 
-:math:`= sec(\theta)tan(\theta) - \int sec(\theta)[sec^2(\theta) - 1]d\theta`
+:math:`= \sec(\theta)\tan(\theta) - \int \sec(\theta)[\sec^2(\theta) - 1]d\theta`
 
-:math:`= sec(\theta)tan(\theta) - \int [sec^3(\theta) - sec(\theta)]d\theta`
+:math:`= \sec(\theta)\tan(\theta) - \int [\sec^3(\theta) - \sec(\theta)]d\theta`
 
-:math:`= sec(\theta)tan(\theta) - \int sec^S3(\theta)d\theta + \int sec(\theta)d\theta`
+:math:`= \sec(\theta)\tan(\theta) - \int \sec^3(\theta)d\theta + \int \sec(\theta)d\theta`
 
-The integration of :math:`sec(\theta)` is given to be :math:`ln |sec(\theta) +
-tan(\theta)| + C`. A proof of this is left to the reader.
+The integration of :math:`\sec(\theta)` is given to be :math:`\ln |\sec(\theta) +
+\tan(\theta)| + C`. A proof of this is left to the reader.
 
 Our integral transforms into:
 
-:math:`\int sec^3(\theta)d\theta = sec(\theta)tan(\theta) + ln |sec(\theta) +
-tan(\theta)| - \int sec^3(\theta)d\theta`
+:math:`\int \sec^3(\theta)d\theta = \sec(\theta)\tan(\theta) + \ln |\sec(\theta) +
+\tan(\theta)| - \int \sec^3(\theta)d\theta`
 
 Moving the integral term to the left side:
 
-:math:`2\int sec^3(\theta)d\theta = sec(\theta)tan(\theta) + ln |sec(\theta) + tan(\theta)|`
+:math:`2\int \sec^3(\theta)d\theta = \sec(\theta)\tan(\theta) + \ln |\sec(\theta) + \tan(\theta)|`
 
 Dividing each side by 2 solves the integral:
 
-:math:`\int sec^3(\theta)d\theta = {1 \over 2}[sec(\theta)tan(\theta) + ln
-|sec(\theta) + tan(\theta)|]`
+:math:`\int \sec^3(\theta)d\theta = {1 \over 2}[\sec(\theta)\tan(\theta) + \ln
+|\sec(\theta) + \tan(\theta)|]`
 
 But we're not done yet. We still need to move back into the :math:`x` world.
 
@@ -436,15 +436,15 @@ But this is what we know:
 .. list-table::
    :header-rows: 0
 
-   * - :math:`tan(\theta)`
+   * - :math:`\tan(\theta)`
      - :math:`x`
 
-   * - :math:`sec(\theta)`
+   * - :math:`\sec(\theta)`
      - :math:`\sqrt{1 + x^2}`
 
 We can substitute these values into the expression for the integral and get:
 
-:math:`{1 \over 2}[x \sqrt{1+x^2} + ln |x + \sqrt{1+x^2}|]`
+:math:`{1 \over 2}[x \sqrt{1+x^2} + \ln |x + \sqrt{1+x^2}|]`
 
 Note that plugging :math:`x = 0` into this expression results in a value of
 `0`. When we evaluate the integral from 0 to :math:`|\theta_1|`, we only need to
@@ -455,14 +455,14 @@ multiplied the integral by: :math:`S \over \theta_1`.
 
 Here's what happens when we plug that in:
 
-:math:`{S \over 2\theta_1}[x \sqrt{1+x^2} + ln |x + \sqrt{1+x^2}|]`
+:math:`{S \over 2\theta_1}[x \sqrt{1+x^2} + \ln |x + \sqrt{1+x^2}|]`
 
-:math:`= {S \over 2\theta_1}x\sqrt{1+x^2} + {S \over 2\theta_1}ln |x + \sqrt{1+x^2}|`
+:math:`= {S \over 2\theta_1}x\sqrt{1+x^2} + {S \over 2\theta_1}\ln |x + \sqrt{1+x^2}|`
 
 In the first term, something happens when we let :math:`x=\theta_1`. The fraction
 :math:`\theta_1 \over \theta_1` reduces to just 1:
 
-:math:`L = {S \over 2}\sqrt{1+\theta_1^2} + {S \over 2\theta_1}ln |\theta_1 +
+:math:`L = {S \over 2}\sqrt{1+\theta_1^2} + {S \over 2\theta_1}\ln |\theta_1 +
 \sqrt{1+\theta_1^2}|`
 
 This is the final formula that is found in the code for Autopilot, with one
