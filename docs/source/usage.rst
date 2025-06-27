@@ -25,7 +25,7 @@ two values are set to zero. With the constructor ``new APConstraints(double
 acceleration, double jerk)``, velocity is left unlimited.
 
 Unless there's a need for a limit on velocity, it is recommended to
-leave this unlimited, and instead governed by the robot's physical maximum
+leave the velocity unlimited, and instead governed by the robot's physical maximum
 speed.
 
 You can find docs on ``APConstraints`` 
@@ -50,8 +50,9 @@ radius. Here's their meanings:
   straight towards target) takes over, even if an entry angle is desired. This should be set to a small
   value.
 
-The default constructor for this class, ``new APProfile()``, sets all values to
-zero. More documentation for this class can be found at the docs `here
+The default constructor for this class, ``new APProfile(APConstraints
+constraints)``, sets all values to zero. More documentation for this class can
+be found at the docs `here
 <https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/APProfile.html>`_.
 
 ``APTarget``
