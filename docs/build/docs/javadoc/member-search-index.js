@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"com.therekrab.autopilot","c":"Library","l":"getNumber()"},{"p":"com.therekrab.autopilot","c":"Library","l":"Library()","u":"%3Cinit%3E()"}];updateSearchResults();
