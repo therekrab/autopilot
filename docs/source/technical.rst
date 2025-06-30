@@ -4,7 +4,7 @@ Under the Hood
 .. note::
    This page describes the algorithm behind Autopilot's path-following
    algorithm. This knowledge is **not** necessary to understand how Autopilot
-   works from the end user's persepctive and is only provided for those
+   works from the end user's perspective and is only provided for those
    interested.
 
 To see a live demo of the paths that Autopilot approaches, check out `this
@@ -21,7 +21,7 @@ Setup
 -----
 
 The first thing that Autopilot does to prepare for the computations that follow
-is by transorming the robot's current position into a position from the
+is by transforming the robot's current position into a position from the
 target's point of view, with entry angle being counted as forwards (+x
 direction). This also places the target at the origin. This is important.
 
@@ -311,7 +311,7 @@ user with unexpected behavior.
 The second instance where Autopilot doesn't follow its own constraints is with
 regards to motion that is not in the direction of the path. This motion can be
 due to bad initial conditions, or - and more importantly - it can be due to a
-discrete time step controller rather than a continuos motion. Autopilot doesn't
+discrete time step controller rather than a continuous motion. Autopilot doesn't
 technically always follow its own path, but this is because from one cycle to
 another, the robot should be travelling in a straight line - but this doesn't
 follow with the path; therefore there will be a little error. Autopilot never
@@ -322,7 +322,7 @@ implement a different acceleration constraint to correct for velocity error,
 but this adds another step that needs to be tuned. And what's worse is that for
 the reasons mentioned above, this sort of correction is important and
 improperly tuning it could cause Autopilot to tell the robot to oscillate or
-exhibit wierd behavior. This was another design decision - we want to make any
+exhibit weird behavior. This was another design decision - we want to make any
 jerky motions at the start of an Autopilot action.
  
 Pt. II
@@ -505,7 +505,7 @@ rotation is demanded. Otherwise, Autopilot simply returns the original rotation.
 A quick note about entry angle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The most pedantic readers will notice one discrepency between how entry angle
+The most pedantic readers will notice one discrepancy between how entry angle
 is described here and its behavior in code. This difference can be explained with
 the following image of an Autopilot trajectory:
 

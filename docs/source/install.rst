@@ -7,7 +7,7 @@ Install via vendordep
 ---------------------
 
 In VS code, press ``Ctrl-Shift-P`` or click the WPILib icon in the top right to
-open the command pallete. Search and select ``Manage Vendor Libraries``.
+open the command palette. Search and select ``Manage Vendor Libraries``.
 
 .. image:: install1.png
    :width: 600
