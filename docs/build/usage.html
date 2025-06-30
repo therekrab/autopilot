@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Under the Hood" href="technical.html" /><link rel="prev" title="Installation" href="install.html" />
+<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Examples" href="examples.html" /><link rel="prev" title="Installation" href="install.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>Usage - Autopilot 2025 documentation</title>
@@ -203,6 +203,7 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">What is Autopilot?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical.html">Under the Hood</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
@@ -265,7 +266,7 @@ takeoff phase. The units are meters per second squared.</p></li>
 <li><p>Jerk: The change in acceleration that will be used during the landing phase.
 These units are meters per second cubed.</p></li>
 </ul>
-<p>With the constructor <cite>new APConstraints()</cite>, velocity is uncapped, and the other
+<p>With the constructor <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APConstraints()</span></code>, velocity is uncapped, and the other
 two values are set to zero. With the constructor <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">APConstraints(double</span>
 <span class="pre">acceleration,</span> <span class="pre">double</span> <span class="pre">jerk)</span></code>, velocity is left unlimited.</p>
 <p>Unless there’s a need for a limit on velocity, it is recommended to
@@ -345,12 +346,12 @@ tolerances. Read more about the <code class="docutils literal notranslate"><span
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="technical.html">
+          <a class="next-page" href="examples.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Under the Hood</div>
+                <div class="title">Examples</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

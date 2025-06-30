@@ -20,7 +20,7 @@ motion. These are:
 - Jerk: The change in acceleration that will be used during the landing phase.
   These units are meters per second cubed.
 
-With the constructor `new APConstraints()`, velocity is uncapped, and the other
+With the constructor ``new APConstraints()``, velocity is uncapped, and the other
 two values are set to zero. With the constructor ``new APConstraints(double
 acceleration, double jerk)``, velocity is left unlimited.
 
@@ -106,3 +106,4 @@ The ``atTarget(Pose2d current, APTarget target)`` method is a method that
 returns whether the current pose of the robot is within the ``Autopilot``'s
 tolerances. Read more about the ``Autopilot`` class `here
 <https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/Autopilot.html>`_
+

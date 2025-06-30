@@ -50,7 +50,7 @@ This curve has a variety of useful applications:
 3. The curve is always decreasing for smaller values of :math:`\theta`. As
    :math:`\theta` approaches zero, the curve moves towards the center. Because
    :math:`\theta = 0` is aligned with the positive x axis, entry angle is
-  always respected, which is good.
+   always respected, which is good.
 
 The value for :math:`a` must scale dynamically, but the value of :math:`b` is
 left unrestricted. Autopilot chooses :math:`b` to be 1. There are two reasons for this:

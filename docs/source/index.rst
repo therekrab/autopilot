@@ -23,6 +23,7 @@ Check out :doc:`about` to learn all the features of Autopilot and why it may
    about
    install
    usage
+   examples
    technical
 
 .. toctree::
