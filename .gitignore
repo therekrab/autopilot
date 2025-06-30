@@ -136,7 +136,7 @@ $RECYCLE.BIN/
 
 ### Gradle ###
 .gradle
-/build/
+build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -161,3 +161,6 @@ bin/
 
 # Ignore Gradle build output directory
 build
+
+# Ignore the docs/build directory
+docs/build
