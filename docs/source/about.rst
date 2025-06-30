@@ -13,7 +13,7 @@ extent. Autopilot doesn't work with "trajectories" - a plan of where the robot
 should be in the future. Instead, Autopilot uses the same methodology as a PID
 controller - it has a clever system in place to determine the correct output to
 reach a reference *without ever planning ahead*. It's easy to see why this can
-be benificial; without the robot trying to develop a plan for the future,
+be beneficial; without the robot trying to develop a plan for the future,
 Autopilot relies on a much less computationally expensive design.
 
 The primary goal of Autopilot is not to follow some trajectory or avoid
