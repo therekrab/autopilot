@@ -12,9 +12,9 @@ solution for autonomous robot control.
 Check out :doc:`about` to learn all the features of Autopilot and why it may
 (or may not) be the solution for your team.
 
-.. warning::
-   This is currently a Java-only library.
-   If your team uses C++, Autopilot is not available.
+.. note:: This is currently a Java-only library. There's a port to C++
+   `here <https://github.com/DanPeled/AutopilotCPP>`_, which isn't *officialy*
+   supported, but it should be similar nonetheless.
 
 .. toctree::
    :maxdepth: 1
