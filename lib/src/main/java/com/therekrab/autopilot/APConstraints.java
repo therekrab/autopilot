@@ -30,6 +30,7 @@ public class APConstraints {
   public APConstraints(double acceleration, double jerk) {
     this.acceleration = acceleration;
     this.jerk = jerk;
+    this.velocity = Double.POSITIVE_INFINITY;
   }
 
   /**
