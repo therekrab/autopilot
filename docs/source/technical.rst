@@ -74,7 +74,7 @@ position, or vice versa (it's the magnitude of displacement).
 
 Once the current position is in polar coordinates, multiplying the curve
 :math:`r = \theta` by the scale factor of :math:`S \over \theta_1`. This works
-because when :math:`\theta = \theta_1`, the fraction `\theta \over \theta_1`
+because when :math:`\theta = \theta_1`, the fraction :math:`\theta \over \theta_1`
 cancels out and becomes 1, leaving :math:`S` - the correct radius for the curve at
 that point.
 
@@ -162,7 +162,7 @@ travel, so **we can express speed as a function of distance**.
 The approach that Autopilot takes is as follows:
 
 1. Calculate max theoretical velocity. This value is "theoretical" because it
-   doesn't take into account the robot's current position. This value is also
+   doesn't take into account the robot's current velocities. This value is also
    the maximum value that obeys the motion constraints, i.e. "max".
 
 2. Adjust that velocity from the current velocity to obey acceleration limits (somewhat).
