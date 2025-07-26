@@ -1,6 +1,10 @@
 name: documentation
 
-on: [push]
+on:
+  push:
+    branches:
+      - main # only run on pushes to main branch
+
 permissions:
   contents: write
 
