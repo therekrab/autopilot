@@ -1,11 +1,13 @@
 package com.therekrab.autopilot;
 
 import static edu.wpi.first.units.Units.Meters;
+import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Radians;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.units.measure.LinearVelocity;
 
 /**
  * Autopilot is a class that tries to drive a target to a goal in 2 dimensional space.
@@ -36,11 +38,14 @@ public class Autopilot {
    * @param velocity The robot's current <b>field relative</b> velocity.
    * @param target The target the robot should drive towards.
    */
-  public Transform2d calculate(Pose2d current, Translation2d velocity, APTarget target) {
+  public APResult calculate(Pose2d current, Translation2d velocity, APTarget target) {
     Translation2d offset = toTargetCoorinateFrame(
         target.m_reference.getTranslation().minus(current.getTranslation()), target);
     if (offset.equals(Translation2d.kZero)) {
-      return new Transform2d(Translation2d.kZero, target.m_reference.getRotation());
+      return new APResult(
+          MetersPerSecond.zero(),
+          MetersPerSecond.zero(),
+          target.m_reference.getRotation());
     }
     Translation2d initial = toTargetCoorinateFrame(velocity, target);
     double disp = offset.getNorm();
@@ -50,13 +55,13 @@ public class Autopilot {
       Translation2d out = correct(initial, goal);
       Translation2d velo = toGlobalCoordinateFrame(out, target);
       Rotation2d rot = getRotationTarget(current.getRotation(), target, disp);
-      return new Transform2d(velo, rot);
+      return new APResult(MetersPerSecond.of(velo.getX()), MetersPerSecond.of(velo.getY()), rot);
     }
     Translation2d goal = calculateSwirlyVelocity(offset, target);
     Translation2d out = correct(initial, goal);
     Translation2d velo = toGlobalCoordinateFrame(out, target);
     Rotation2d rot = getRotationTarget(current.getRotation(), target, disp);
-    return new Transform2d(velo, rot);
+    return new APResult(MetersPerSecond.of(velo.getX()), MetersPerSecond.of(velo.getY()), rot);
   }
 
   /**
@@ -183,5 +188,11 @@ public class Autopilot {
     boolean okTheta = Math.abs(current.getRotation().minus(goal.getRotation())
         .getRadians()) <= m_profile.errorTheta.in(Radians);
     return okXY && okTheta;
+  }
+
+  /**
+   * The resultant motion from a call to <code>Autopilot.calculate()</code>
+   */
+  public record APResult(LinearVelocity vx, LinearVelocity vy, Rotation2d targetAngle) {
   }
 }
