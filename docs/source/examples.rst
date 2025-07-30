@@ -52,12 +52,12 @@ the execution of a command.
      Translation2d velocities = drivetrain.getFieldRelativeSpeeds();
      Pose2d pose = drivetrain.getCurrentPose();
 
-     Tranform2d output = Constants.kAutopilot.calculate(pose, velocities, target);
+     APResult output = Constants.kAutopilot.calculate(pose, velocities, target);
 
      /* these speeds are field relative */
-     double veloX = output.getX();
-     double veloY = output.getY();
-     Rotation2d headingReference = output.getRotation();
+     LinearVelocity veloX = output.vx();
+     LinearVelocity veloY = output.vy();
+     Rotation2d headingReference = output.targetRotation();
 
      /* This is where you should apply these speeds to the drivetrain */
    });
@@ -188,16 +188,12 @@ type of drivetrain):
        Translation2d velocities = m_drivetrain.getFieldRelativeSpeeds();
        Pose2d pose = m_drivetrain.getCurrentPose();
 
-       Transform2d out = Constants.kAutopilot.calculate(pose, velocity, m_target);
-
-       double veloX = out.getX();
-       double veloY = out.getY();
-       Rotation2d headingReference = out.getRotation();
+       APResult out = Constants.kAutopilot.calculate(pose, velocity, m_target);
 
        m_drivetrain.setControl(m_request
-           .withVelcoityX(veloX)
-           .withVelocityY(veloY)
-           .withTargetDirection(headingReference));
+           .withVelcoityX(out.vx())
+           .withVelocityY(out.vy())
+           .withTargetDirection(out.targetAngle()));
      }
 
      @Override
