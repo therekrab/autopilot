@@ -55,16 +55,6 @@ dependencies {
     testRuntimeOnly 'us.hebi.quickbuf:quickbuf-runtime:1.4'
 }
 
-publishing {
-	publications {
-		maven(MavenPublication) {
-			from components.java
-			groupId = "com.github.jonahsnider"
-			artifactId = "doglog"
-		}
-	}
-}
-
 java {
     withSourcesJar()
     withJavadocJar()
