@@ -42,6 +42,23 @@ public class APVelocity {
 
 
         /**
+   * Update this APVelocity with a new ChassisSpeeds.
+   * 
+   * <p> As Autopilot is intended to be called periodically, if you are using APVelocity, 
+   * use this to update the APVelocity with the robot's current ChassisSpeeds.
+   * 
+   * @return a Translation2d used for Autopilot calculations
+   */
+
+  public APVelocity updateSpeeds(ChassisSpeeds robotRelativeSpeeds) {
+    this.vx = robotRelativeSpeeds.vxMetersPerSecond;
+    this.vy = robotRelativeSpeeds.vyMetersPerSecond;
+    this.omega = robotRelativeSpeeds.omegaRadiansPerSecond;
+    return this;  
+  }
+
+
+        /**
    * Get the Translation2d representation of this APVelocity.
    * 
    * <p> If you are using APVelocity, pass this getter into Autopilot.calculate().
@@ -55,5 +72,7 @@ public class APVelocity {
       new Rotation2d(omega)
       );
   }
+
+
 
 }
