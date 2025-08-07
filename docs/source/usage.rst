@@ -92,8 +92,8 @@ The docs on ``APTarget`` can be found `here
 -------------
 
 This is the class that actually handles any computations. This has two public
-methods, ``calculate(Pose2d current, Translation2d velocity, APTarget target)``
-and ``atTarget(Pose2d current, APTarget target)``.
+methods, ``calculate(Pose2d current, ChassisSpeeds robotRelativeSpeeds,
+APTarget target)`` and ``atTarget(Pose2d current, APTarget target)``.
 
 The ``calculate(Pose2d current, Translation2d velocity, APTarget target)``
 method computes the field-relative speeds of the robot and its ideal heading at
