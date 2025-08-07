@@ -49,10 +49,10 @@ the execution of a command.
 .. code-block:: java
 
    Command alignCommand = drivetrain.run(() -> {
-     Translation2d velocities = drivetrain.getFieldRelativeSpeeds();
+     ChassisSpeeds robotRelativeSpeeds = drivetrain.getRobotRelativeSpeeds();
      Pose2d pose = drivetrain.getCurrentPose();
 
-     APResult output = Constants.kAutopilot.calculate(pose, velocities, target);
+     APResult output = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, target);
 
      /* these speeds are field relative */
      LinearVelocity veloX = output.vx();
@@ -126,10 +126,10 @@ into a command factory method on the drivetrain itself:
 
    public Command align(APTarget target) {
      return this.run(() -> {
-       Translation2d velocities = this.getFieldRelativeSpeeds();
+       ChassisSpeeds robotRelativeSpeeds = this.getRobotRelativeSpeeds();
        Pose2d pose = this.getCurrentPose();
 
-       Tranform2d output = Constants.kAutopilot.calculate(pose, velocities, target);
+       Tranform2d output = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, target);
 
        /* these speeds are field relative */
        double veloX = output.getX();
@@ -185,10 +185,10 @@ type of drivetrain):
 
      @Override
      public void execute() {
-       Translation2d velocities = m_drivetrain.getFieldRelativeSpeeds();
+       ChassisSpeeds robotRelativeSpeeds = m_drivetrain.getRobotRelativeSpeeds();
        Pose2d pose = m_drivetrain.getCurrentPose();
 
-       APResult out = Constants.kAutopilot.calculate(pose, velocity, m_target);
+       APResult out = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, m_target);
 
        m_drivetrain.setControl(m_request
            .withVelcoityX(out.vx())
