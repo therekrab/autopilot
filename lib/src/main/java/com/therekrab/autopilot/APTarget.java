@@ -6,14 +6,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Distance;
 
 /**
- * A class representing the goal end state of an autopilot action
+ * The APTarget class represents the goal end state of an Autopilot action.
  * 
  * A target needs a reference Pose2d, but can optionally have a specified entry angle and rotation
- * radius
+ * radius.
  *
- * A target may also specify an end velocity.
- *
- * The target also may have a desired end velocity.
+ * A target may also specify an end velocity or end velocity.
  */
 public class APTarget {
   protected Pose2d m_reference;
@@ -22,7 +20,7 @@ public class APTarget {
   protected Optional<Distance> m_rotationRadius;
 
   /**
-   * Creates a new autopilot target with the given target pose, no entry angle, and no end velocity.
+   * Creates a new Autopilot target with the given target pose, no entry angle, and no end velocity.
    * 
    * @param pose The reference pose for this target.
    */
@@ -34,9 +32,9 @@ public class APTarget {
   }
 
   /**
-   * Returns a copy of this target with the given reference.
+   * Returns a copy of this target with the given reference Pose2d.
    *
-   * @param reference The reference pose for this target.
+   * @param reference The reference Pose2d for this target.
    */
   public APTarget withReference(Pose2d reference) {
     APTarget target = this.clone();
@@ -71,9 +69,10 @@ public class APTarget {
   /**
    * Returns a copy of this target with the given rotation radius.
    *
-   * Rotation radius is the distance from the target pose that rotation goals are respected. By
-   * default, rotation goals are always respected, but if autopilot shouldn't reorient the robot
-   * until X distance from setpoint, this can be used to make that change.
+   * <p> Rotation radius is the distance from the target pose that rotation goals are respected.
+   * 
+   * <p> By default, rotation goals are always respected. Adjusting this radius prevents Autopilot from reorienting
+   * the robot until the robot is within the specified radius of the target.
    *
    * @param radius The rotation radius for the new target
    */
@@ -84,7 +83,7 @@ public class APTarget {
   }
 
   /**
-   * Returns this target's reference pose.
+   * Returns this target's reference Pose2d.
    */
   public Pose2d getReference() {
     return m_reference;
@@ -112,7 +111,7 @@ public class APTarget {
   }
 
   /**
-   * Creates a copy of this APTarget
+   * Creates a copy of this APTarget.
    */
   public APTarget clone() {
     APTarget target = new APTarget(m_reference);
@@ -123,8 +122,9 @@ public class APTarget {
   }
 
   /**
-   * Retuns a copy of this target, without the entry angle set. This is useful if trying to make two
-   * different targets with and without entry angle set.
+   * Retuns a copy of this target, without the entry angle set. 
+   * 
+   * <p> This is useful if trying to make two different targets with and without entry angle set.
    */
   public APTarget withoutEntryAngle() {
     APTarget target = new APTarget(m_reference);
