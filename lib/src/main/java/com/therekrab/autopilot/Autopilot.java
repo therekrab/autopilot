@@ -5,8 +5,8 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Radians;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.units.measure.LinearVelocity;
 
 /**
@@ -35,19 +35,25 @@ public class Autopilot {
    * Returns the next field relative velocity for the trajectory
    *
    * @param current The robot's current position.
-   * @param velocity The robot's current <b>field relative</b> velocity.
+   * @param robotRelativeSpeeds The robot's current <b>robot relative</b> ChassisSpeeds.
    * @param target The target the robot should drive towards.
    */
-  public APResult calculate(Pose2d current, Translation2d velocity, APTarget target) {
+  public APResult calculate(Pose2d current, ChassisSpeeds robotRelativeSpeeds, APTarget target) {
     Translation2d offset = toTargetCoorinateFrame(
         target.m_reference.getTranslation().minus(current.getTranslation()), target);
+
     if (offset.equals(Translation2d.kZero)) {
       return new APResult(
           MetersPerSecond.zero(),
           MetersPerSecond.zero(),
           target.m_reference.getRotation());
     }
-    Translation2d initial = toTargetCoorinateFrame(velocity, target);
+
+    Translation2d fieldRelativeSpeeds = new Translation2d(
+        robotRelativeSpeeds.vxMetersPerSecond,
+        robotRelativeSpeeds.vyMetersPerSecond).rotateBy(current.getRotation());
+
+    Translation2d initial = toTargetCoorinateFrame(fieldRelativeSpeeds, target);
     double disp = offset.getNorm();
     if (target.m_entryAngle.isEmpty() || disp < m_profile.beelineRadius.in(Meters)) {
       Translation2d towardsTarget = offset.div(disp);
