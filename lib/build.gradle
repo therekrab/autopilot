@@ -55,6 +55,16 @@ dependencies {
     testRuntimeOnly 'us.hebi.quickbuf:quickbuf-runtime:1.4'
 }
 
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from components.java
+			groupId = "com.therekrab.autopilot"
+			artifactId = "autopilot"
+		}
+	}
+}
+
 java {
     withSourcesJar()
     withJavadocJar()
