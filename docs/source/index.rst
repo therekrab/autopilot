@@ -7,7 +7,7 @@ Autopilot Documentation
 =======================
 
 Autopilot is a tool developed by FRC team 3414, designed to act as a powerful
-solution for autonomous robot control.
+solution for autonomous robot motion control.
 
 Check out :doc:`about` to learn all the features of Autopilot and why it may
 (or may not) be the solution for your team.
@@ -21,6 +21,7 @@ Check out :doc:`about` to learn all the features of Autopilot and why it may
    :caption: Contents:
 
    about
+   prerequisites
    install
    usage
    examples
