@@ -56,7 +56,8 @@ rotation control is left up to the user. A profiled PID controller on the
 robot's angle is fine.
 
 With CTRE drivetrains, the ``FieldCentricFacingAngle`` request allows the user
-to supply P, I, and D values as well as a field-relative angular setpoint.
+to supply P, I, and D values for the heading controller as well as a
+field-relative angular setpoint and max angular speed.
 
 What's *recommended*?
 ---------------------
