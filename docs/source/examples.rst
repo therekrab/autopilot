@@ -96,7 +96,7 @@ velocities.
    private SwerveRequest.FieldCentricFacingAngle m_request = new SwerveRequest.FieldCentricFacingAngle()
        .withForwardPerspective(ForwardPerspectiveValue.BlueAlliance)
        .withDriveRequestType(DriveRequestType.Velocity)
-       .withHeadingPID(4, 0, 0); /* change theese values for your robot */
+       .withHeadingPID(4, 0, 0); /* change these values for your robot */
 
 From here, we can use this request to apply field-relative velocities:
 

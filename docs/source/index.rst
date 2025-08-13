@@ -13,7 +13,7 @@ Check out :doc:`about` to learn all the features of Autopilot and why it may
 (or may not) be the solution for your team.
 
 .. note:: This is currently a Java-only library. There's a port to C++
-   `here <https://github.com/DanPeled/AutopilotCPP>`_, which isn't *officialy*
+   `here <https://github.com/DanPeled/AutopilotCPP>`_, which isn't *officially*
    supported, but it should be similar nonetheless.
 
 .. toctree::
