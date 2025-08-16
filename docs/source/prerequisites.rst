@@ -62,9 +62,9 @@ field-relative angular setpoint and max angular speed.
 What's *recommended*?
 ---------------------
 
-Although you can run Autopilot the following features in your robot code, it is
-*severely* recommended to ensure their presence such that the robot acts in the
-desired manner.
+Although you can run Autopilot without the following features in your robot
+code, it is *severely* recommended to ensure their presence such that the robot
+acts in the desired manner.
 
 Accurate drivetrain characterization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,6 +79,17 @@ acceleration can be significantly lower than expected.
 
 Feedforward constants such as ``kA`` and ``kS`` can help the drivetrain quickly
 follow velocity references.
+
+.. tip:: If you've already manually tuned your drivetrain, but are either
+   experiencing small issues you can't fix, or want to squeeze the last bit of
+   performance out of the drivetrain, consider using WPILib's `SysID tool
+   <https://docs.wpilib.org/en/stable/docs/software/pathplanning/trajectory-tutorial/characterizing-drive.html>`_.
+   If you're on a CTRE-generated project, then SysID is part of the swerve API,
+   which makes it easier to use.
+
+   However, *please* don't use SysID before any sort of manual tuning. Read
+   more about this on `this Chief Delphi post
+   <https://www.chiefdelphi.com/t/psa-please-dont-use-sysid-before-manual-tuning/491767>`_.
 
 Accurate vision/localization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
