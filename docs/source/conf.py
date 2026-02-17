@@ -9,7 +9,7 @@
 project = 'Autopilot'
 copyright = '2025, Nolan Barker'
 author = 'Nolan Barker'
-release = '2025'
+release = '2026'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
