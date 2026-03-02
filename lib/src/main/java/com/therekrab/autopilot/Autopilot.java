@@ -28,7 +28,7 @@ public class Autopilot {
    * for all actions.
    */
   public Autopilot(APProfile profile) {
-    profile = profile;
+    this.profile = profile;
   }
 
   /**
