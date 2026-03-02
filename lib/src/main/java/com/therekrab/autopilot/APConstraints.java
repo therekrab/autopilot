@@ -10,18 +10,23 @@ public class APConstraints {
   protected double acceleration;
   protected double jerk;
 
-  /** Creates a blank APConstraints object.
-   * <p> A blank APConstraints will not limit velocity, acceleration, or jerk.
-  */
+  /**
+   * Creates a blank APConstraints object.
+   * <p>
+   * A blank APConstraints will not limit velocity, acceleration, or jerk.
+   */
   public APConstraints() {
-    this.velocity = Double.POSITIVE_INFINITY; // Default to no limit on velocity
+    this(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
   }
 
   /**
    * Creates a new APConstraints object with a given max velocity, acceleration, and jerk.
+   * 
    * @param velocity The maximum velocity that Autopilot will demand, in m/s
-   * @param acceleration The maximum acceleration that Autopilot action will use to correct initial velocities, in m/s^2
-   * @param jerk The maximum jerk that Autopilot will use to decelerate at the end of an action, in m/s^3
+   * @param acceleration The maximum acceleration that Autopilot action will use to correct initial
+   *        velocities, in m/s^2
+   * @param jerk The maximum jerk that Autopilot will use to decelerate at the end of an action, in
+   *        m/s^3
    */
 
   public APConstraints(double velocity, double acceleration, double jerk) {
@@ -32,51 +37,53 @@ public class APConstraints {
 
   /**
    * Create a new APConstraints object with a given max acceleration and jerk.
-   * <p> This constructor defaults the velocity to unlimited.
-   * @param acceleration The maximum acceleration that  Autopilot action will use to correct initial velocities, in m/s^2
-   * @param jerk The maximum jerk that Autopilot will use to decelerate at the end of an action, in m/s^3
+   * <p>
+   * This constructor defaults the velocity to unlimited.
+   * 
+   * @param acceleration The maximum acceleration that Autopilot action will use to correct initial
+   *        velocities, in m/s^2
+   * @param jerk The maximum jerk that Autopilot will use to decelerate at the end of an action, in
+   *        m/s^3
    * 
    */
   public APConstraints(double acceleration, double jerk) {
-    this.acceleration = acceleration;
-    this.jerk = jerk;
-    this.velocity = Double.POSITIVE_INFINITY;
+    this(Double.POSITIVE_INFINITY, acceleration, jerk);
   }
 
   /**
-   * Modifies this APConstraints object's max velocity and returns itself. 
-   * This affects the maximum velocity that Autopilot can demand.
+   * Copies this APConstraints object, changes the copy's max velocity, and returns the copy. This
+   * affects the maximum velocity that Autopilot can demand.
    * 
-   * @param velocity The maximum velocity that Autopilot will demand, in m/s
+   * @param newVelocity The maximum velocity that Autopilot will demand, in m/s
    */
-  public APConstraints withVelocity(double velocity) {
-    this.velocity = velocity;
-    return this;
+  public APConstraints withVelocity(double newVelocity) {
+    return new APConstraints(newVelocity, this.acceleration, this.jerk);
   }
 
   /**
-   * Modifies this APConstraint object's acceleration and returns itself. This affects the maximum
-   * acceleration that Autopilot will use to correct initial velocities.
+   * Copies this APConstraint object, changes the copy's acceleration, and returns the copy. This
+   * affects the maximum acceleration that Autopilot will use to correct initial velocities.
    *
-   * <p> Autopilot's acceleration is used at the beginning of an action (not relevant to Autopilot's end behavior).
+   * <p>
+   * Autopilot's acceleration is used at the beginning and end of an action
    * 
-   * @param acceleration The maximum acceleration that Autopilot will use to start a path, in m/s^2
+   * @param newAcceleration The maximum acceleration that Autopilot will use to start a path, in
+   *        m/s^2
    */
-  public APConstraints withAcceleration(double acceleration) {
-    this.acceleration = acceleration;
-    return this;
+  public APConstraints withAcceleration(double newAcceleration) {
+    return new APConstraints(this.velocity, newAcceleration, this.jerk);
   }
 
   /**
-   * Modifies this constraint's max jerk value and returns itself. Higher values mean a faster
-   * deceleration.
+   * Copies this APConstraint object, changes the copy's max jerk, and returns the copy. Higher
+   * values mean a faster deceleration.
    * 
    * Autopilot's jerk is used at the end of an action (not relevant to Autopilot's start behavior).
    * 
-   * @param jerk The maximum jerk that Autopilot will use to decelerate at the end of an action, in m/s^3
+   * @param newJerk The maximum jerk that Autopilot will use to decelerate at the end of an action,
+   *        in m/s^3
    */
-  public APConstraints withJerk(double jerk) {
-    this.jerk = jerk;
-    return this;
+  public APConstraints withJerk(double newJerk) {
+    return new APConstraints(this.velocity, this.acceleration, newJerk);
   }
 }
