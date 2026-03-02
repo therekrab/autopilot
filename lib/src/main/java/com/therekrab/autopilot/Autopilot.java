@@ -12,13 +12,14 @@ import edu.wpi.first.units.measure.LinearVelocity;
 /**
  * Autopilot is a class that tries to drive a target to a goal in 2-D space.
  *
- * Autopilot is a stateless algorithm; as such, it does not "think ahead" and cannot avoid obstacles.
- * Any math that Autopilot needs is already worked out such that only a small amount of computation is necessary on the fly. 
- * Autopilot is designed to be used in a drivetrain's control loop, where the current state of the robot is passed in, and the next velocity is returned.
+ * Autopilot is a stateless algorithm; as such, it does not "think ahead" and cannot avoid
+ * obstacles. Any math that Autopilot needs is already worked out such that only a small amount of
+ * computation is necessary on the fly. Autopilot is designed to be used in a drivetrain's control
+ * loop, where the current state of the robot is passed in, and the next velocity is returned.
  * 
  */
 public class Autopilot {
-  private APProfile m_profile;
+  private APProfile profile;
 
   private final double dt = 0.020;
 
@@ -27,7 +28,7 @@ public class Autopilot {
    * for all actions.
    */
   public Autopilot(APProfile profile) {
-    m_profile = profile;
+    profile = profile;
   }
 
   /**
@@ -56,9 +57,10 @@ public class Autopilot {
 
     Translation2d initial = toTargetCoordinateFrame(fieldRelativeSpeeds, target);
     double disp = offset.getNorm();
-    if (target.m_entryAngle.isEmpty() || disp < m_profile.beelineRadius.in(Meters)) {
+    if (target.m_entryAngle.isEmpty() || disp < profile.beelineRadius.in(Meters)) {
       Translation2d towardsTarget = offset.div(disp);
-      Translation2d goal = towardsTarget.times(calculateMaxVelocity(disp, target.m_velocity));
+      Translation2d goal =
+          towardsTarget.times(profile.constraints.calculateMaxVelocity(disp) + target.m_velocity);
       Translation2d out = correct(initial, goal);
       Translation2d velo = toGlobalCoordinateFrame(out, target);
       Rotation2d rot = getRotationTarget(current.getRotation(), target, disp);
@@ -89,17 +91,6 @@ public class Autopilot {
   }
 
   /**
-   * Determines the maximum velocity required to travel the given distance and end at the desired
-   * end velocity.
-   * @param dist The distance to travel, in meters
-   * @param endVelo The desired end velocity, in m/s
-   */
-  private double calculateMaxVelocity(double dist, double endVelo) {
-    return Math.pow((4.5 * Math.pow(dist, 2.0)) * m_profile.constraints.jerk, 1.0 / 3.0)
-        + endVelo;
-  }
-
-  /**
    * Attempts to drive the initial translation to the goal translation using the parameters for
    * acceleration given in the profile.
    * 
@@ -116,11 +107,11 @@ public class Autopilot {
     double initialI = adjustedInitial.getX();
     double goalI = adjustedGoal.getX();
     // we cap the adjusted I because we'd rather adjust now than overshoot.
-    if (goalI > m_profile.constraints.velocity) {
-      goalI = m_profile.constraints.velocity;
+    if (goalI > profile.constraints.velocity) {
+      goalI = profile.constraints.velocity;
     }
     double adjustedI = Math.min(goalI,
-        push(initialI, goalI, m_profile.constraints.acceleration));
+        push(initialI, goalI, profile.constraints.acceleration));
     return new Translation2d(adjustedI, 0).rotateBy(angleOffset);
   }
 
@@ -156,13 +147,15 @@ public class Autopilot {
     double vy = rads * theta.getCos() + theta.getSin();
     return new Translation2d(vx, vy)
         .div(Math.hypot(vx, vy)) // normalize
-        .times(calculateMaxVelocity(dist, target.m_velocity)); // and scale to new length
+        .times(profile.constraints.calculateMaxVelocity(dist) + target.m_velocity); // and scale to
+                                                                                    // new length
   }
 
   /**
    * Using a precomputed integral, returns the length of the path that the swirly method generates.
    *
-   * <p> More specifically, this calculates the arc length of the polar curve r=theta from the given
+   * <p>
+   * More specifically, this calculates the arc length of the polar curve r=theta from the given
    * angle to zero, then scales it to match the current state.
    * 
    * @param theta The angle of the offset from the robot to the target, in radians
@@ -180,7 +173,8 @@ public class Autopilot {
   }
 
   /**
-   * Returns the target's rotation if the robot is within a specified rotation radius; otherwise, returns the current rotation of the robot.
+   * Returns the target's rotation if the robot is within a specified rotation radius; otherwise,
+   * returns the current rotation of the robot.
    * 
    * @param current The current rotation of the robot.
    * @param target The APTarget that Autopilot is trying to reach.
@@ -209,9 +203,9 @@ public class Autopilot {
   public boolean atTarget(Pose2d current, APTarget target) {
     Pose2d goal = target.m_reference;
     boolean okXY = Math.hypot(current.getX() - goal.getX(),
-        current.getY() - goal.getY()) <= m_profile.errorXY.in(Meters);
+        current.getY() - goal.getY()) <= profile.errorXY.in(Meters);
     boolean okTheta = Math.abs(current.getRotation().minus(goal.getRotation())
-        .getRadians()) <= m_profile.errorTheta.in(Radians);
+        .getRadians()) <= profile.errorTheta.in(Radians);
     return okXY && okTheta;
   }
 
