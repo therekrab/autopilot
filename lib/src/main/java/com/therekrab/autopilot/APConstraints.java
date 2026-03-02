@@ -10,6 +10,16 @@ public class APConstraints {
   protected double acceleration;
   protected double jerk;
 
+  // These values represent the "cutoff" parameters that Autopilot uses to determine what should be
+  // happening during the end behavior of a path. These are always the same for a constant
+  // constraint, so to save the most computational time, they're precomputed with the constraint,
+  // rather than each time Autopilot.calculate is called.
+
+  /** Cutoff distance */
+  protected final double x0;
+  /** Velocity at cutoff distance */
+  protected final double v0;
+
   /**
    * Creates a blank APConstraints object.
    * <p>
@@ -33,6 +43,9 @@ public class APConstraints {
     this.velocity = velocity;
     this.acceleration = acceleration;
     this.jerk = jerk;
+
+    x0 = Math.pow(acceleration, 3.0) / (18.0 * jerk * jerk);
+    v0 = jerkConstrainedVelocity(x0);
   }
 
   /**
@@ -85,5 +98,25 @@ public class APConstraints {
    */
   public APConstraints withJerk(double newJerk) {
     return new APConstraints(this.velocity, this.acceleration, newJerk);
+  }
+
+  /**
+   * Determines the maximum velocity required to travel the given distance and end at 0 m/s.
+   * 
+   * @param dist The distance to travel, in meters
+   */
+  protected double calculateMaxVelocity(double dist) {
+    if (dist > x0) {
+      return accelerationConstrainedVelocity(dist);
+    }
+    return jerkConstrainedVelocity(dist);
+  }
+
+  private double accelerationConstrainedVelocity(double dist) {
+    return Math.sqrt(v0 * v0 + 2.0 * acceleration * (dist - x0));
+  }
+
+  private double jerkConstrainedVelocity(double dist) {
+    return Math.pow((4.5 * Math.pow(dist, 2.0)) * jerk, 1.0 / 3.0);
   }
 }
