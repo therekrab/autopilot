@@ -1,9 +1,9 @@
 package com.therekrab.autopilot;
 
 import java.util.Optional;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.units.measure.Distance;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.units.measure.Distance;
 
 /**
  * The APTarget class represents the goal end state of an Autopilot action.

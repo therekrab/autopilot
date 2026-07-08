@@ -49,7 +49,7 @@ the execution of a command.
 .. code-block:: java
 
    Command alignCommand = drivetrain.run(() -> {
-     ChassisSpeeds robotRelativeSpeeds = drivetrain.getRobotRelativeSpeeds();
+     ChassisVelocities robotRelativeSpeeds = drivetrain.getRobotRelativeSpeeds();
      Pose2d pose = drivetrain.getCurrentPose();
 
      APResult output = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, target);
@@ -57,7 +57,7 @@ the execution of a command.
      /* these speeds are field relative */
      LinearVelocity veloX = output.vx();
      LinearVelocity veloY = output.vy();
-     Rotation2d headingReference = output.targetRotation();
+     Rotation2d headingReference = output.targetAngle();
 
      /* This is where you should apply these speeds to the drivetrain */
    });
@@ -105,9 +105,9 @@ From here, we can use this request to apply field-relative velocities:
 .. code-block:: java
 
    /* snip */
-   double veloX = output.getX()
-   double veloY = output.getY();
-   Rotation2d headingReference = output.getRotation();
+   double veloX = output.vx().in(MetersPerSecond);
+   double veloY = output.vy().in(MetersPerSecond);
+   Rotation2d headingReference = output.targetAngle();
  
    drivetrain.setControl(m_request
       .withVelocityX(veloX)
@@ -126,15 +126,15 @@ into a command factory method on the drivetrain itself:
 
    public Command align(APTarget target) {
      return this.run(() -> {
-       ChassisSpeeds robotRelativeSpeeds = this.getRobotRelativeSpeeds();
+       ChassisVelocities robotRelativeSpeeds = this.getRobotRelativeSpeeds();
        Pose2d pose = this.getCurrentPose();
 
-       Tranform2d output = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, target);
+       APResult output = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, target);
 
        /* these speeds are field relative */
-       double veloX = output.getX();
-       double veloY = output.getY();
-       Rotation2d headingReference = output.getRotation();
+       double veloX = output.vx().in(MetersPerSecond);
+       double veloY = output.vy().in(MetersPerSecond);
+       Rotation2d headingReference = output.targetAngle();
 
        this.setControl(m_fieldRelativeRequest
            .withVelocityX(veloX)
@@ -163,7 +163,7 @@ type of drivetrain):
 .. code-block:: java
 
    public class AlignCommand extends Command {
-     private final APTargeet m_target;
+     private final APTarget m_target;
      private final Drivetrain m_drivetrain;
 
      private final SwerveRequest.FieldCentricFacingAngle m_request = new SwerveRequest.FieldCentricFacingAngle()
@@ -185,14 +185,14 @@ type of drivetrain):
 
      @Override
      public void execute() {
-       ChassisSpeeds robotRelativeSpeeds = m_drivetrain.getRobotRelativeSpeeds();
+       ChassisVelocities robotRelativeSpeeds = m_drivetrain.getRobotRelativeSpeeds();
        Pose2d pose = m_drivetrain.getCurrentPose();
 
        APResult out = Constants.kAutopilot.calculate(pose, robotRelativeSpeeds, m_target);
 
        m_drivetrain.setControl(m_request
-           .withVelcoityX(out.vx())
-           .withVelocityY(out.vy())
+           .withVelocityX(out.vx().in(MetersPerSecond))
+           .withVelocityY(out.vy().in(MetersPerSecond))
            .withTargetDirection(out.targetAngle()));
      }
 

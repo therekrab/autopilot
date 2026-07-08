@@ -3,7 +3,7 @@
  *
  * This generated file contains a sample Java library project to get you
  * started. For more details on building Java & JVM projects, please refer to
- * https://docs.gradle.org/8.14.1/userguide/building_java_projects.html in the
+ * https://docs.gradle.org/9.4.1/userguide/building_java_projects.html in the
  * Gradle documentation.
  */
 
@@ -11,39 +11,48 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
     id 'maven-publish'
-    id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2025.0'
 }
+
+group = "com.github.therekrab"
+version = "1.7.0-alpha-6"
 
 tasks.withType(Javadoc) {
     options {
         title = "Autopilot API"
-        links "https://docs.oracle.com/en/java/javase/17/docs/api/", 'https://github.wpilib.org/allwpilib/docs/release/java/'
+        links "https://docs.oracle.com/en/java/javase/25/docs/api/", 'https://github.wpilib.org/allwpilib/docs/release/java/'
     }
 }
 
-ext.wpilibVersion = "2026.+"
+ext.wpilibVersion = "2027.0.0-alpha-6"
+ext.wpilibYear = "2027_alpha5"
+
+def wpilibHome = {
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        def publicFolder = System.getenv('PUBLIC') ?: 'C:\\Users\\Public'
+        return new File(new File(publicFolder, 'wpilib'), wpilibYear)
+    }
+    return new File(new File(System.getProperty('user.home'), 'wpilib'), wpilibYear)
+}
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
-}
-
-if (project.hasProperty('releaseMode')) {
-	wpilibRepositories.addAllReleaseRepositories(project)
-} else {
-	wpilibRepositories.addAllDevelopmentRepositories(project)
+    maven {
+        name = "wpilibHome"
+        url = new File(wpilibHome(), "maven")
+    }
 }
 
 dependencies {
-    implementation "edu.wpi.first.cscore:cscore-java:$wpilibVersion"
-    implementation "edu.wpi.first.cameraserver:cameraserver-java:$wpilibVersion"
-    implementation "edu.wpi.first.ntcore:ntcore-java:$wpilibVersion"
-    implementation "edu.wpi.first.wpilibj:wpilibj-java:$wpilibVersion"
-    implementation "edu.wpi.first.wpiutil:wpiutil-java:$wpilibVersion"
-    implementation "edu.wpi.first.wpimath:wpimath-java:$wpilibVersion"
-    implementation "edu.wpi.first.wpiunits:wpiunits-java:$wpilibVersion"
-    implementation "edu.wpi.first.hal:hal-java:$wpilibVersion"
-    implementation "org.ejml:ejml-simple:0.43.1"
+    implementation "org.wpilib.cscore:cscore-java:$wpilibVersion"
+    implementation "org.wpilib.cameraserver:cameraserver-java:$wpilibVersion"
+    implementation "org.wpilib.ntcore:ntcore-java:$wpilibVersion"
+    implementation "org.wpilib.wpilibj:wpilibj-java:$wpilibVersion"
+    implementation "org.wpilib.wpiutil:wpiutil-java:$wpilibVersion"
+    api "org.wpilib.wpimath:wpimath-java:$wpilibVersion"
+    api "org.wpilib.wpiunits:wpiunits-java:$wpilibVersion"
+    implementation "org.wpilib.hal:hal-java:$wpilibVersion"
+    implementation "org.ejml:ejml-simple:0.44.0"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
     implementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
@@ -56,11 +65,19 @@ dependencies {
 }
 
 publishing {
+	repositories {
+		maven {
+			name = "vendordep"
+			url = layout.buildDirectory.dir("vendordep/maven")
+		}
+	}
+
 	publications {
 		maven(MavenPublication) {
 			from components.java
-			groupId = "com.therekrab.autopilot"
+			groupId = project.group
 			artifactId = "autopilot"
+			version = project.version
 		}
 	}
 }
@@ -70,11 +87,23 @@ java {
     withJavadocJar()
 
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+}
+
+tasks.register('generateVendordep', Copy) {
+    from(rootProject.file("vendordep.json"))
+    into(layout.buildDirectory.dir("vendordep"))
+    rename { "Autopilot.json" }
+}
+
+tasks.register('vendordepPackage') {
+    dependsOn tasks.named('publishMavenPublicationToVendordepRepository')
+    dependsOn tasks.named('generateVendordep')
 }

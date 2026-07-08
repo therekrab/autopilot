@@ -1,0 +1,202 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.github.therekrab",
+    "module": "autopilot",
+    "version": "1.7.0-alpha-6",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.wpilib.wpimath",
+          "module": "wpimath-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.wpiunits",
+          "module": "wpiunits-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "autopilot-1.7.0-alpha-6.jar",
+          "url": "autopilot-1.7.0-alpha-6.jar",
+          "size": 7976,
+          "sha512": "d8d861fd92db856d3c7f4d2901259a39d41dd359390016a04b296254288735c491bcabf8fb4e10a05ecee1e50d5af0c02387639198820934bf5de4b3fe327ec6",
+          "sha256": "81d2a8e296fb8b242c79335f18965584aa1273bf51024f447082ffefdf45c314",
+          "sha1": "b3fb823b34acd88a6120518bfb0abd9778b234a2",
+          "md5": "2a242cc1279b39453d1831fc38d1d57a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.wpilib.cscore",
+          "module": "cscore-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.cameraserver",
+          "module": "cameraserver-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.ntcore",
+          "module": "ntcore-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.wpilibj",
+          "module": "wpilibj-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.wpiutil",
+          "module": "wpiutil-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.hal",
+          "module": "hal-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.ejml",
+          "module": "ejml-simple",
+          "version": {
+            "requires": "0.44.0"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-annotations",
+          "version": {
+            "requires": "2.15.2"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-core",
+          "version": {
+            "requires": "2.15.2"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-databind",
+          "version": {
+            "requires": "2.15.2"
+          }
+        },
+        {
+          "group": "org.wpilib.wpimath",
+          "module": "wpimath-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        },
+        {
+          "group": "org.wpilib.wpiunits",
+          "module": "wpiunits-java",
+          "version": {
+            "requires": "2027.0.0-alpha-6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "autopilot-1.7.0-alpha-6.jar",
+          "url": "autopilot-1.7.0-alpha-6.jar",
+          "size": 7976,
+          "sha512": "d8d861fd92db856d3c7f4d2901259a39d41dd359390016a04b296254288735c491bcabf8fb4e10a05ecee1e50d5af0c02387639198820934bf5de4b3fe327ec6",
+          "sha256": "81d2a8e296fb8b242c79335f18965584aa1273bf51024f447082ffefdf45c314",
+          "sha1": "b3fb823b34acd88a6120518bfb0abd9778b234a2",
+          "md5": "2a242cc1279b39453d1831fc38d1d57a"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "autopilot-1.7.0-alpha-6-sources.jar",
+          "url": "autopilot-1.7.0-alpha-6-sources.jar",
+          "size": 6890,
+          "sha512": "f53ef5ce289cf9b6775ba33fbb89820b4a91dd5b0cf2fd7ea2e706a75bbf4beeb980d5c7ba7796747fbb33b16facda595f8e3735bcba22d4b3cb2bf43e837e79",
+          "sha256": "9c4c01ceeea0aa25e4bff7c210c999c4ced91cb70e8c47cf02d00dc05a841b4a",
+          "sha1": "d9e179bf2ae8802186b5360f30a4bc9d46b965f9",
+          "md5": "f4cb56314599ebef192e29d676ecb3d4"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "autopilot-1.7.0-alpha-6-javadoc.jar",
+          "url": "autopilot-1.7.0-alpha-6-javadoc.jar",
+          "size": 4165665,
+          "sha512": "3dada2679128f024035cc6852358b383ccb589a851599a1201b1e8410f7e601276f349bd048376c02b7fe750a70ef508e71750ec8b77877d578a6441b5a05e1d",
+          "sha256": "99c3df028e0b7f4e8bf0f055a248b417a4dee18e10b2cab397e15af63fb47955",
+          "sha1": "b79aadfa0e39697a0141d7ca1705201f1390affe",
+          "md5": "56b644eb55a3f6798a17bce5be3eac8d"
+        }
+      ]
+    }
+  ]
+}
