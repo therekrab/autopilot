@@ -20,11 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
       - name: Generate javadocs
         run: |
-          if [ -d "$HOME/wpilib/2027_alpha5/maven" ]; then
-            ./gradlew :lib:javadoc
-          else
-            echo "Skipping javadocs because WPILib 2027_alpha5 is not installed on this runner."
-          fi
+          ./gradlew :lib:javadoc
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
@@ -33,7 +29,7 @@ jobs:
           sphinx-build docs/source docs/build
       - name: Deploy javadocs and vendordep
         run: |
-          if [ -d lib/build/docs/javadoc ]; then cp -r lib/build/docs/javadoc docs/build; fi
+          cp -r lib/build/docs/javadoc docs/build
           cp vendordep.json docs/build/
           cp -r maven docs/build/maven
       - name: Deploy to GitHub Pages

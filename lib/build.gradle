@@ -23,7 +23,7 @@ tasks.withType(Javadoc) {
     }
 }
 
-ext.wpilibVersion = "2027.0.0-alpha-6"
+ext.wpilibVersion = "2027.0.0-alpha-7"
 ext.wpilibYear = "2027_alpha5"
 
 def wpilibHome = {
@@ -37,9 +37,19 @@ def wpilibHome = {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    // Prefer a local WPILib install when present, so offline builds keep working.
     maven {
         name = "wpilibHome"
         url = new File(wpilibHome(), "maven")
+    }
+    // WPILib artifacts are not on Maven Central; CI resolves them from frcmaven.
+    maven {
+        name = "wpilibRelease"
+        url = "https://frcmaven.wpi.edu/artifactory/release"
+    }
+    maven {
+        name = "wpilibDevelopment"
+        url = "https://frcmaven.wpi.edu/artifactory/development"
     }
 }
 
