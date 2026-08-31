@@ -1,9 +1,9 @@
 package com.therekrab.autopilot;
 
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.Rotations;
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.Distance;
+import static org.wpilib.units.Units.Meters;
+import static org.wpilib.units.Units.Rotations;
+import org.wpilib.units.measure.Angle;
+import org.wpilib.units.measure.Distance;
 
 /**
  * A class representing a profile that determines how Autopilot approaches a target.

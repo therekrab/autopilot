@@ -92,7 +92,7 @@ The docs on ``APTarget`` can be found `here
 -------------
 
 This is the class that actually handles any computations. This has two public
-methods, ``calculate(Pose2d current, ChassisSpeeds robotRelativeSpeeds,
+methods, ``calculate(Pose2d current, ChassisVelocities robotRelativeSpeeds,
 APTarget target)`` and ``atTarget(Pose2d current, APTarget target)``.
 
 The ``calculate(Pose2d current, Translation2d velocity, APTarget target)``
@@ -107,4 +107,3 @@ The ``atTarget(Pose2d current, APTarget target)`` method is a method that
 returns whether the current pose of the robot is within the ``Autopilot``'s
 tolerances. Read more about the ``Autopilot`` class `here
 <https://therekrab.github.io/autopilot/javadoc/com/therekrab/autopilot/Autopilot.html>`_
-

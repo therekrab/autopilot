@@ -13,10 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 25
       - uses: actions/setup-python@v5
       - name: Generate javadocs
         run: |
-          ./gradlew javadoc
+          if [ -d "$HOME/wpilib/2027_alpha5/maven" ]; then
+            ./gradlew :lib:javadoc
+          else
+            echo "Skipping javadocs because WPILib 2027_alpha5 is not installed on this runner."
+          fi
       - name: Install dependencies
         run: |
           pip install -r docs/requirements.txt
@@ -25,8 +33,9 @@ jobs:
           sphinx-build docs/source docs/build
       - name: Deploy javadocs and vendordep
         run: |
-          cp -r lib/build/docs/javadoc docs/build
+          if [ -d lib/build/docs/javadoc ]; then cp -r lib/build/docs/javadoc docs/build; fi
           cp vendordep.json docs/build/
+          cp -r maven docs/build/maven
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
