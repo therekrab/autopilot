@@ -1,13 +1,13 @@
 package com.therekrab.autopilot;
 
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.MetersPerSecond;
-import static edu.wpi.first.units.Units.Radians;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.units.measure.LinearVelocity;
+import static org.wpilib.units.Units.Meters;
+import static org.wpilib.units.Units.MetersPerSecond;
+import static org.wpilib.units.Units.Radians;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.geometry.Translation2d;
+import org.wpilib.math.kinematics.ChassisVelocities;
+import org.wpilib.units.measure.LinearVelocity;
 
 /**
  * Autopilot is a class that tries to drive a target to a goal in 2-D space.
@@ -35,16 +35,16 @@ public class Autopilot {
    * Returns the next field relative velocity for the trajectory
    *
    * @param current The robot's current position.
-   * @param robotRelativeSpeeds The robot's current <b>robot relative</b> ChassisSpeeds.
+   * @param robotRelativeSpeeds The robot's current <b>robot relative</b> ChassisVelocities.
    * @param target The target the robot should drive towards.
    * 
    * @return an APResult containing the next velocity and target angle
    */
-  public APResult calculate(Pose2d current, ChassisSpeeds robotRelativeSpeeds, APTarget target) {
+  public APResult calculate(Pose2d current, ChassisVelocities robotRelativeSpeeds, APTarget target) {
     Translation2d offset = toTargetCoordinateFrame(
         target.m_reference.getTranslation().minus(current.getTranslation()), target);
 
-    if (offset.equals(Translation2d.kZero)) {
+    if (offset.equals(Translation2d.ZERO)) {
       return new APResult(
           MetersPerSecond.zero(),
           MetersPerSecond.zero(),
@@ -52,8 +52,8 @@ public class Autopilot {
     }
 
     Translation2d fieldRelativeSpeeds = new Translation2d(
-        robotRelativeSpeeds.vxMetersPerSecond,
-        robotRelativeSpeeds.vyMetersPerSecond).rotateBy(current.getRotation());
+        robotRelativeSpeeds.vx,
+        robotRelativeSpeeds.vy).rotateBy(current.getRotation());
 
     Translation2d initial = toTargetCoordinateFrame(fieldRelativeSpeeds, target);
     double disp = offset.getNorm();
@@ -78,7 +78,7 @@ public class Autopilot {
    * direction of the target's entry angle, if applicable (otherwise no change to angles).
    */
   private Translation2d toTargetCoordinateFrame(Translation2d coords, APTarget target) {
-    Rotation2d entryAngle = target.m_entryAngle.orElse(Rotation2d.kZero);
+    Rotation2d entryAngle = target.m_entryAngle.orElse(Rotation2d.ZERO);
     return coords.rotateBy(entryAngle.unaryMinus());
   }
 
@@ -86,7 +86,7 @@ public class Autopilot {
    * Turns a translation from a target-relative coordinate frame to a global coordinate frame.
    */
   private Translation2d toGlobalCoordinateFrame(Translation2d coords, APTarget target) {
-    Rotation2d entryAngle = target.m_entryAngle.orElse(Rotation2d.kZero);
+    Rotation2d entryAngle = target.m_entryAngle.orElse(Rotation2d.ZERO);
     return coords.rotateBy(entryAngle);
   }
 
@@ -98,8 +98,8 @@ public class Autopilot {
    * @param goal The goal translation to drive to
    */
   private Translation2d correct(Translation2d initial, Translation2d goal) {
-    Rotation2d angleOffset = Rotation2d.kZero;
-    if (!goal.equals(Translation2d.kZero)) {
+    Rotation2d angleOffset = Rotation2d.ZERO;
+    if (!goal.equals(Translation2d.ZERO)) {
       angleOffset = new Rotation2d(goal.getX(), goal.getY());
     }
     Translation2d adjustedGoal = goal.rotateBy(angleOffset.unaryMinus());

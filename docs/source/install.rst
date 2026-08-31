@@ -20,7 +20,9 @@ Then select ``Install New Libraries (online)``:
 Finally, enter the vendordep URL:
 ``https://therekrab.github.io/autopilot/vendordep.json``.
 
-Run a build to finish up, and you've got Autopilot installed!
+Run a build to finish up, and you've got Autopilot installed. The published
+vendordep includes the Autopilot Maven artifact, so robot projects do not need
+to add JitPack separately.
 It's available with the package name ``com.therekrab.autopilot``.
 
 You *may* have to reopen your editor if suggestions aren't loading right away.

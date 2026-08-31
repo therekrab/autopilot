@@ -30,7 +30,7 @@ the robot's frame of reference, following the `WPILib coordinate system
 If you're using a CTRE generated drivetrain, the method here is
 ``getRobotRelativeSpeeds()``.
 
-Autopilot expects speeds of the type ``ChassisSpeeds``.
+Autopilot expects speeds of the type ``ChassisVelocities``.
 
 Apply field-relative speeds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
