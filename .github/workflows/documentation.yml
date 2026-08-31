@@ -31,7 +31,6 @@ jobs:
         run: |
           cp -r lib/build/docs/javadoc docs/build
           cp vendordep.json docs/build/
-          cp -r maven docs/build/maven
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

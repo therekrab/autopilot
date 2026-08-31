@@ -49,7 +49,6 @@
 
 # Package Files #
 *.jar
-!maven/**/*.jar
 *.war
 *.nar
 *.ear

@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.github.therekrab"
-version = "1.7.0-alpha-6"
+version = "1.7.0-alpha-7"
 
 tasks.withType(Javadoc) {
     options {
